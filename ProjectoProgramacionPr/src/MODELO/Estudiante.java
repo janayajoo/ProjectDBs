@@ -9,7 +9,6 @@ import java.util.Objects;
 
 /**
  *
- * @author SERGIO PC
  */
 public class Estudiante extends Persona {
     private String programa, genero, foto;

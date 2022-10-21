@@ -7,7 +7,6 @@ package MODELO;
 
 /**
  *
- * @author SERGIO PC
  */
 public class Persona {
     private String id;

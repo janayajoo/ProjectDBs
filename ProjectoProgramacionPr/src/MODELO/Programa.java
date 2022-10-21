@@ -9,7 +9,6 @@ import java.util.Objects;
 
 /**
  *
- * @author SERGIO PC
  */
 public class Programa {
     
@@ -99,9 +98,6 @@ public class Programa {
     public boolean equals(Object obj){
         if (this == obj){
             return true;
-        }
-        if (this == null){
-            return false;
         }
         if (getClass() != obj.getClass()){
             return false;
