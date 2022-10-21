@@ -1,2 +1,0 @@
-20222618;jorge gomez;CALCULO 1;2;luis beltran
-20222618;jorge gomez;PROGRAMACION;3;diego perez

@@ -1,2 +1,0 @@
-20222618;jorge gomez;INGENIERIA CIVIL;Masculino;fotoHombre.jpg
-20231758;diana ruiz;INGENIERIA QUIMICA;Femenino;fotoMujer.jpg

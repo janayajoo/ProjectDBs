@@ -1,3 +1,0 @@
-CAL517;CALCULO 1;2;luis beltran; null
-PRO254;PROGRAMACION;3;sandra guzman; null
-FIS445;FISICA 1;4;diego perez; null

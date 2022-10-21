@@ -1,3 +1,0 @@
-1111;luis beltran;2;sinFoto.jpg
-234;sandra guzman;3;sinFoto.jpg
-12234;diego perez;1;sinFoto.jpg
