@@ -1,0 +1,2 @@
+ING125;INGENIERIA CIVIL;true;false;false
+ING124;INGENIERIA QUIMICA;false;true;false
