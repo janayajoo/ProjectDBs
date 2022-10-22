@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -27,7 +29,7 @@
             <ImageView fx:id="imagePrincipal" fitHeight="311.0" fitWidth="650.0" layoutX="-5.0" layoutY="-5.0" />
          </children>
       </Pane>
-      <Pane fx:id="gestionPrograma" layoutX="5.0" layoutY="33.0" prefHeight="399.0" prefWidth="649.0" style="-fx-background-color: #eb984e;">
+      <Pane fx:id="gestionPrograma" layoutX="5.0" layoutY="33.0" prefHeight="399.0" prefWidth="649.0" style="-fx-background-color: #eb984e;" visible="false">
          <children>
             <ImageView fx:id="carrerasImg" fitHeight="399.0" fitWidth="649.0" />
             <Pane layoutX="6.0" layoutY="214.0" prefHeight="178.0" prefWidth="122.0" style="-fx-border-color: #17202a;">
@@ -211,15 +213,42 @@
             </Pane>
          </children>
       </Pane>
+      <Pane fx:id="gestionPrograma11" layoutX="8.0" layoutY="31.0" prefHeight="399.0" prefWidth="649.0" style="-fx-background-color: #eb984e;">
+         <children>
+            <Pane layoutX="4.0" layoutY="43.0" prefHeight="354.0" prefWidth="640.0" style="-fx-border-color: #17202a;">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Code" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="Code_Country1" layoutX="134.0" layoutY="13.0" prefHeight="32.0" prefWidth="193.0" />
+                  <TableView layoutX="7.0" layoutY="54.0" prefHeight="293.0" prefWidth="625.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <Pane layoutX="105.0" layoutY="4.0" prefHeight="34.0" prefWidth="471.0" style="-fx-border-color: #17202a;">
+               <children>
+                  <Button fx:id="CreateCountry1" layoutX="12.0" layoutY="5.0" mnemonicParsing="false" onAction="#doCreateCountry" prefHeight="24.0" prefWidth="100.0" text="Create" />
+                  <Button fx:id="UpdateCountry1" layoutX="177.0" layoutY="6.0" mnemonicParsing="false" onAction="#doUpdateCountry" prefHeight="24.0" prefWidth="100.0" text="Update" />
+                  <Button fx:id="DeleteCountry1" layoutX="365.0" layoutY="3.0" mnemonicParsing="false" onAction="#doDeleteCountry" prefHeight="24.0" prefWidth="100.0" text="Delete" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
       <MenuBar fx:id="menuBar" layoutX="2.0" layoutY="1.0" prefHeight="27.0" prefWidth="660.0" style="-fx-border-color: #000000;">
         <menus>
           <Menu fx:id="menuConsulta" mnemonicParsing="false" text="PROCESOS">
             <items>
-                  <MenuItem fx:id="menuPrincipal" mnemonicParsing="false" onAction="#doAction4" text="Menu principal" />
-              <MenuItem fx:id="menuGestion1" mnemonicParsing="false" onAction="#doOpcion1" text="City CRUD" />
-                  <MenuItem fx:id="menuGestion2" mnemonicParsing="false" onAction="#doAction2" text="Country CRUD" />
-                  <MenuItem fx:id="menuGestion21" mnemonicParsing="false" onAction="#doAction2" text="Country Language CRUD" />
-                  <MenuItem fx:id="menuGestion211" mnemonicParsing="false" onAction="#doAction2" text="Operaciones" />
+                  <MenuItem fx:id="menuPrincipal" mnemonicParsing="false" onAction="#doMenu" text="Menu principal" />
+              <MenuItem fx:id="MoveCity" mnemonicParsing="false" onAction="#doCity" text="City CRUD" />
+                  <MenuItem fx:id="MoveCountry" mnemonicParsing="false" onAction="#doCountry" text="Country CRUD" />
+                  <MenuItem fx:id="MoveCL" mnemonicParsing="false" onAction="#doCL" text="Country Language CRUD" />
+                  <MenuItem fx:id="MoveOperaciones" mnemonicParsing="false" onAction="#doOperations" text="Operaciones" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="SALIDA">
