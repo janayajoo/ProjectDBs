@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -18,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="442.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLERS.ManuPrincipalController">
    <children>
-      <Pane layoutX="14.0" layoutY="45.0" prefHeight="65.0" prefWidth="640.0" style="-fx-border-radius: 10; -fx-border-color: #000000; -fx-background-color: #bfb7bf;">
+      <Pane layoutX="14.0" layoutY="45.0" prefHeight="65.0" prefWidth="640.0" style="-fx-border-radius: 10; -fx-border-color: #000000; -fx-background-color: #bfb7bf;" visible="false">
          <children>
             <Label alignment="CENTER" layoutX="22.0" layoutY="7.0" prefHeight="55.0" prefWidth="609.0" text="GESTION ACADEMICA" textAlignment="CENTER">
                <font>
@@ -27,142 +22,204 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="14.0" layoutY="124.0" prefHeight="311.0" prefWidth="640.0" style="-fx-background-color: #bfb7bf; -fx-border-color: #000000;">
+      <Pane layoutX="14.0" layoutY="124.0" prefHeight="311.0" prefWidth="640.0" style="-fx-background-color: #bfb7bf; -fx-border-color: #000000;" visible="false">
          <children>
-            <ImageView fx:id="imagePrincipal" fitHeight="311.0" fitWidth="650.0" layoutX="-5.0" layoutY="-5.0">
-               <image>
-                  <Image url="@../../GUI/menuPrincipal.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="imagePrincipal" fitHeight="311.0" fitWidth="650.0" layoutX="-5.0" layoutY="-5.0" />
          </children>
       </Pane>
       <Pane fx:id="gestionPrograma" layoutX="5.0" layoutY="33.0" prefHeight="399.0" prefWidth="649.0" style="-fx-background-color: #eb984e;" visible="false">
          <children>
-            <ImageView fx:id="carrerasImg" fitHeight="399.0" fitWidth="649.0">
-               <image>
-                  <Image url="@../../GUI/carreras.png" />
-               </image>
-            </ImageView>
-            <Pane layoutX="6.0" layoutY="14.0" prefHeight="151.0" prefWidth="263.0" style="-fx-border-color: #17202a;">
+            <ImageView fx:id="carrerasImg" fitHeight="399.0" fitWidth="649.0" />
+            <Pane layoutX="6.0" layoutY="214.0" prefHeight="178.0" prefWidth="122.0" style="-fx-border-color: #17202a;">
                <children>
-                  <Button fx:id="nuevoPrograma" layoutX="7.0" layoutY="14.0" mnemonicParsing="false" onAction="#doNuevoPrograma" prefHeight="38.0" prefWidth="112.0" text="NUEVO" />
-                  <Button fx:id="guardarPrograma" disable="true" layoutX="151.0" layoutY="14.0" mnemonicParsing="false" onAction="#doGuardarPrograma" prefHeight="38.0" prefWidth="101.0" text="GUARDAR" />
-                  <Button fx:id="buscarPrograma" layoutX="7.0" layoutY="57.0" mnemonicParsing="false" onAction="#doBuscarPrograma" prefHeight="38.0" prefWidth="245.0" text="BUSCAR" />
-                  <Button fx:id="modificarPrograma" layoutX="7.0" layoutY="106.0" mnemonicParsing="false" onAction="#doModificarPrograma" prefHeight="38.0" prefWidth="112.0" text="MODIFICAR" />
-                  <Button fx:id="eliminarPrograma" layoutX="151.0" layoutY="106.0" mnemonicParsing="false" onAction="#doEliminarPrograma" prefHeight="38.0" prefWidth="101.0" text="ELIMINAR" />
+                  <Button fx:id="nuevoPrograma" layoutX="6.0" layoutY="12.0" mnemonicParsing="false" onAction="#doNuevoPrograma" prefHeight="38.0" prefWidth="100.0" text="Create" />
+                  <Button fx:id="modificarPrograma" layoutX="9.0" layoutY="69.0" mnemonicParsing="false" onAction="#doModificarPrograma" prefHeight="38.0" prefWidth="100.0" text="Update" />
+                  <Button fx:id="eliminarPrograma" layoutX="9.0" layoutY="127.0" mnemonicParsing="false" onAction="#doEliminarPrograma" prefHeight="38.0" prefWidth="100.0" text="Delete" />
                </children></Pane>
-            <Pane layoutX="276.0" layoutY="14.0" prefHeight="151.0" prefWidth="354.0" style="-fx-border-color: #17202a;">
+            <Pane layoutX="133.0" layoutY="14.0" prefHeight="378.0" prefWidth="497.0" style="-fx-border-color: #17202a;">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="76.0" style="-fx-border-color: #17202a;" text="CODIGO" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="ID" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <Label contentDisplay="CENTER" layoutX="14.0" layoutY="59.0" prefHeight="32.0" prefWidth="76.0" style="-fx-border-color: #17202a;" text="NOMBRE:" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="91.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Name:" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="codigoPro" layoutX="103.0" layoutY="14.0" prefHeight="32.0" prefWidth="233.0" />
-                  <TextField fx:id="codigoNamePro" layoutX="103.0" layoutY="59.0" prefHeight="32.0" prefWidth="233.0" />
-                  <CheckBox fx:id="Acreditada" layoutX="14.0" layoutY="103.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" style="-fx-border-color: #000000;" text="ACREDITADA" textFill="WHITE" />
-                  <CheckBox fx:id="Presencial" layoutX="127.0" layoutY="103.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" style="-fx-border-color: #000000;" text="PRESENCIAL" textFill="WHITE" />
-                  <CheckBox fx:id="Online" layoutX="235.0" layoutY="103.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" style="-fx-border-color: #000000;" text="ONLINE" textFill="WHITE" />
-               </children>
-            </Pane>
-            <Pane layoutX="3.0" layoutY="171.0" prefHeight="220.0" prefWidth="629.0" style="-fx-border-color: #17202a;">
-               <children>
-                  <TableView fx:id="misProgramas" layoutX="7.0" layoutY="3.0" onMouseClicked="#displaySelectedProgram" opacity="0.84" prefHeight="215.0" prefWidth="617.0">
-                    <columns>
-                      <TableColumn fx:id="colCodigo" prefWidth="115.0" text="Codigo" />
-                      <TableColumn fx:id="colNombre" prefWidth="239.0" text="Nombre" />
-                        <TableColumn fx:id="colAcreditada" minWidth="0.0" prefWidth="106.0" text="Acreditada" />
-                        <TableColumn fx:id="colPresencial" prefWidth="75.0" text="Presencial" />
-                        <TableColumn fx:id="colOnline" prefWidth="75.0" text="Online" />
-                    </columns>
-                  </TableView>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="162.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Country Code" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="236.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="District" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="311.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Population" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="codigoPro" layoutX="134.0" layoutY="13.0" prefHeight="32.0" prefWidth="279.0" />
+                  <TextField fx:id="codigoNamePro" layoutX="136.0" layoutY="90.0" prefHeight="32.0" prefWidth="273.0" />
+                  <TextField fx:id="codigoPro1" layoutX="138.0" layoutY="161.0" prefHeight="32.0" prefWidth="266.0" />
+                  <TextField fx:id="codigoPro2" layoutX="135.0" layoutY="235.0" prefHeight="32.0" prefWidth="267.0" />
+                  <TextField fx:id="codigoPro3" layoutX="131.0" layoutY="310.0" prefHeight="32.0" prefWidth="272.0" />
                </children>
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="gestionEstudiante" layoutX="7.0" layoutY="32.0" prefHeight="399.0" prefWidth="649.0" style="-fx-background-color: #f39c12; -fx-border-color: #010409; -fx-border-style: dashed solid;" visible="false">
+      <Pane fx:id="gestionPrograma1" layoutX="7.0" layoutY="36.0" prefHeight="399.0" prefWidth="649.0" style="-fx-background-color: #eb984e;" visible="false">
          <children>
-            <ImageView fx:id="estudiantesImg" fitHeight="411.0" fitWidth="662.0" layoutX="-11.0" layoutY="-1.0">
-               <image>
-                  <Image url="@../../GUI/estudiantes.png" />
-               </image>
-            </ImageView>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="27.0" prefWidth="59.0" style="-fx-border-color: #000000;" text="AÑO" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="23.0" prefHeight="27.0" prefWidth="76.0" style="-fx-border-color: #000000;" text="PERIODO" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="comboAño" layoutX="80.0" layoutY="23.0" onAction="#doYear" prefHeight="27.0" prefWidth="101.0" promptText="SELECTED" />
-            <ComboBox fx:id="comboPeriodo" disable="true" layoutX="274.0" layoutY="23.0" onAction="#doPeriodo" prefHeight="27.0" prefWidth="101.0" promptText="SELECTED" />
-            <TextField fx:id="codigoEstudiante" layoutX="116.0" layoutY="63.0" prefHeight="25.0" prefWidth="263.0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="62.0" prefHeight="27.0" prefWidth="92.0" style="-fx-border-color: #000000;" text="CODIGO" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="96.0" prefHeight="27.0" prefWidth="92.0" style="-fx-border-color: #000000;" text="NOMBRE" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <TextField fx:id="nombreEstudiante" layoutX="116.0" layoutY="97.0" prefHeight="25.0" prefWidth="263.0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="135.0" prefHeight="27.0" prefWidth="92.0" style="-fx-border-color: #000000;" text="CARRERA" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="comboProgr" layoutX="116.0" layoutY="135.0" prefHeight="27.0" prefWidth="263.0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="173.0" prefHeight="55.0" prefWidth="368.0" style="-fx-border-color: #ffffff;" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <CheckBox fx:id="estudianteFemenino" layoutX="24.0" layoutY="185.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="164.0" text="Femenino" textFill="WHITE" />
-            <CheckBox fx:id="estuidianteMasculino" layoutX="216.0" layoutY="185.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="164.0" text="Masculino" textFill="WHITE" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="252.0" prefHeight="140.0" prefWidth="245.0" style="-fx-border-color: #ffffff;" textAlignment="CENTER">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Pane layoutX="405.0" layoutY="25.0" prefHeight="169.0" prefWidth="164.0" style="-fx-border-color: #ffffff;">
+            <ImageView fx:id="carrerasImg1" fitHeight="405.0" fitWidth="652.0" layoutX="-3.0" layoutY="-8.0" />
+            <Pane layoutX="4.0" layoutY="43.0" prefHeight="349.0" prefWidth="626.0" style="-fx-border-color: #17202a;">
                <children>
-                  <ImageView fx:id="imgFoto" fitHeight="151.0" fitWidth="137.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Code" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="52.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Name:" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="89.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Continent" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="126.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Region" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="163.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Surface Area" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="codigoPro1" layoutX="134.0" layoutY="13.0" prefHeight="32.0" prefWidth="193.0" />
+                  <TextField fx:id="codigoNamePro1" layoutX="134.0" layoutY="51.0" prefHeight="32.0" prefWidth="478.0" />
+                  <TextField fx:id="codigoPro11" layoutX="135.0" layoutY="88.0" prefHeight="32.0" prefWidth="476.0" />
+                  <TextField fx:id="codigoPro21" layoutX="135.0" layoutY="125.0" prefHeight="32.0" prefWidth="479.0" />
+                  <TextField fx:id="codigoPro31" layoutX="135.0" layoutY="162.0" prefHeight="32.0" prefWidth="482.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="13.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Code 2" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="codigoPro311" layoutX="454.0" layoutY="13.0" prefHeight="32.0" prefWidth="150.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="236.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Population" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="codigoPro3111" layoutX="134.0" layoutY="235.0" prefHeight="32.0" prefWidth="195.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="273.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Life Expect" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="codigoPro31111" layoutX="133.0" layoutY="272.0" prefHeight="32.0" prefWidth="196.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="308.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="GNP" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="codigoPro311111" layoutX="135.0" layoutY="307.0" prefHeight="32.0" prefWidth="193.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="340.0" layoutY="306.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="GNP Old" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="codigoPro3111111" layoutX="465.0" layoutY="306.0" prefHeight="32.0" prefWidth="150.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="337.0" layoutY="236.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Local Name" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="codigoPro311112" layoutX="464.0" layoutY="234.0" prefHeight="32.0" prefWidth="150.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="199.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Goverment" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="codigoPro3111121" layoutX="132.0" layoutY="197.0" prefHeight="32.0" prefWidth="196.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="337.0" layoutY="270.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Capital" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="codigoPro3112" layoutX="466.0" layoutY="270.0" prefHeight="32.0" prefWidth="150.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="197.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Head State" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="codigoPro3113" layoutX="461.0" layoutY="198.0" prefHeight="32.0" prefWidth="158.0" />
                </children>
             </Pane>
-            <Button fx:id="nuevaFotoEst" layoutX="405.0" layoutY="194.0" mnemonicParsing="false" onAction="#buscarFoto" prefHeight="32.0" prefWidth="164.0" text="NUEVA FOTO" />
-            <Button fx:id="nuevoEst" layoutX="24.0" layoutY="266.0" mnemonicParsing="false" onAction="#doNuevoEst" prefHeight="32.0" prefWidth="101.0" text="NUEVO" />
-            <Button fx:id="guardarEst" disable="true" layoutX="147.0" layoutY="266.0" mnemonicParsing="false" onAction="#doGuardarEst" prefHeight="32.0" prefWidth="101.0" text="GUARDAR" />
-            <Button fx:id="buscarEst" layoutX="147.0" layoutY="306.0" mnemonicParsing="false" onAction="#doBuscarEst" prefHeight="32.0" prefWidth="101.0" text="BUSCAR" />
-            <Button fx:id="todosEst" layoutX="23.0" layoutY="353.0" mnemonicParsing="false" onAction="#doCargarTodos" prefHeight="32.0" prefWidth="101.0" text="TODOS" />
-            <Button fx:id="modificarEst" layoutX="147.0" layoutY="353.0" mnemonicParsing="false" onAction="#doModificarEst" prefHeight="32.0" prefWidth="101.0" text="MODIFICAR" />
-            <Button fx:id="eliminarEst" layoutX="23.0" layoutY="306.0" mnemonicParsing="false" onAction="#doEliminarEst" prefHeight="32.0" prefWidth="101.0" text="ELIMINAR" />
-            <TableView fx:id="tablaInscripcionesEst" layoutX="282.0" layoutY="238.0" opacity="0.8" prefHeight="151.0" prefWidth="354.0">
-              <columns>
-                <TableColumn fx:id="colAsignaturaEst" prefWidth="143.0" text="ASIGNATURA" />
-                <TableColumn fx:id="colProfesorEst" prefWidth="210.0" text="PROFESOR" />
-              </columns>
-            </TableView>
-            <Button fx:id="nextEst" layoutX="587.0" layoutY="47.0" mnemonicParsing="false" onAction="#doNextEst" prefHeight="32.0" prefWidth="39.0" text="&gt;" />
-            <Button fx:id="backEst" layoutX="587.0" layoutY="94.0" mnemonicParsing="false" onAction="#doBackEst" prefHeight="32.0" prefWidth="39.0" text="&lt;" />
+            <Pane layoutX="105.0" layoutY="4.0" prefHeight="34.0" prefWidth="471.0" style="-fx-border-color: #17202a;">
+               <children>
+                  <Button fx:id="nuevoPrograma1" layoutX="12.0" layoutY="5.0" mnemonicParsing="false" onAction="#doNuevoPrograma" prefHeight="24.0" prefWidth="100.0" text="Create" />
+                  <Button fx:id="modificarPrograma1" layoutX="177.0" layoutY="6.0" mnemonicParsing="false" onAction="#doModificarPrograma" prefHeight="24.0" prefWidth="100.0" text="Update" />
+                  <Button fx:id="eliminarPrograma1" layoutX="362.0" layoutY="7.0" mnemonicParsing="false" onAction="#doEliminarPrograma" prefHeight="24.0" prefWidth="100.0" text="Delete" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane fx:id="gestionPrograma2" layoutX="7.0" layoutY="36.0" prefHeight="399.0" prefWidth="649.0" style="-fx-background-color: #eb984e;">
+         <children>
+            <Pane layoutX="6.0" layoutY="214.0" prefHeight="178.0" prefWidth="122.0" style="-fx-border-color: #17202a;">
+               <children>
+                  <Button fx:id="nuevoPrograma2" layoutX="6.0" layoutY="12.0" mnemonicParsing="false" onAction="#doNuevoPrograma" prefHeight="38.0" prefWidth="100.0" text="Create" />
+                  <Button fx:id="modificarPrograma2" layoutX="9.0" layoutY="69.0" mnemonicParsing="false" onAction="#doModificarPrograma" prefHeight="38.0" prefWidth="100.0" text="Update" />
+                  <Button fx:id="eliminarPrograma2" layoutX="9.0" layoutY="127.0" mnemonicParsing="false" onAction="#doEliminarPrograma" prefHeight="38.0" prefWidth="100.0" text="Delete" />
+               </children>
+            </Pane>
+            <Pane layoutX="133.0" layoutY="14.0" prefHeight="378.0" prefWidth="497.0" style="-fx-border-color: #17202a;">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Country Code" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="112.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Language" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="209.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Is Official" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="311.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Percentage" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="codigoPro1" layoutX="134.0" layoutY="13.0" prefHeight="32.0" prefWidth="279.0" />
+                  <TextField fx:id="codigoNamePro2" layoutX="132.0" layoutY="111.0" prefHeight="32.0" prefWidth="273.0" />
+                  <TextField fx:id="codigoPro12" layoutX="135.0" layoutY="208.0" prefHeight="32.0" prefWidth="266.0" />
+                  <TextField fx:id="codigoPro22" layoutX="133.0" layoutY="310.0" prefHeight="32.0" prefWidth="267.0" />
+               </children>
+            </Pane>
          </children>
       </Pane>
       <MenuBar fx:id="menuBar" layoutX="2.0" layoutY="1.0" prefHeight="27.0" prefWidth="660.0" style="-fx-border-color: #000000;">
         <menus>
-          <Menu fx:id="menuConsulta" mnemonicParsing="false" text="GESTION">
+          <Menu fx:id="menuConsulta" mnemonicParsing="false" text="PROCESOS">
             <items>
-              <MenuItem fx:id="menuGestion1" mnemonicParsing="false" onAction="#doOpcion1" text="Gestion Programa" />
-                  <MenuItem fx:id="menuGestion2" mnemonicParsing="false" onAction="#doAction2" text="Gestion Estudiante" />
                   <MenuItem fx:id="menuPrincipal" mnemonicParsing="false" onAction="#doAction4" text="Menu principal" />
+              <MenuItem fx:id="menuGestion1" mnemonicParsing="false" onAction="#doOpcion1" text="City CRUD" />
+                  <MenuItem fx:id="menuGestion2" mnemonicParsing="false" onAction="#doAction2" text="Country CRUD" />
+                  <MenuItem fx:id="menuGestion21" mnemonicParsing="false" onAction="#doAction2" text="Country Language CRUD" />
+                  <MenuItem fx:id="menuGestion211" mnemonicParsing="false" onAction="#doAction2" text="Operaciones" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="SALIDA">

@@ -20,8 +20,6 @@ public class Start extends Application {
         launch(args);
     }
     
-   
-
     @Override
     public void start(Stage Ventana) throws Exception {
         
@@ -31,7 +29,7 @@ public class Start extends Application {
         
         Ventana.setScene(scene);
         
-        Ventana.setTitle("MENU PRINCIPAL");
+        Ventana.setTitle("PROYECTO DB");
         
         //Ventana.SetOnCloserequest(event -> )
         Ventana.setResizable(false);
