@@ -18,100 +18,19 @@ import javafx.scene.layout.Pane;
 public class ManuPrincipalController {
 
     @FXML
-    private CheckBox Acreditada;
-
-    @FXML
-    private CheckBox Online;
-
-    @FXML
-    private CheckBox Presencial;
-
-    @FXML
     private MenuItem Salir;
-
-    @FXML
-    private Button backEst;
-
-    @FXML
-    private Button buscarEst;
-
-    @FXML
-    private Button buscarPrograma;
 
     @FXML
     private ImageView carrerasImg;
 
     @FXML
-    private TextField codigoEstudiante;
-
-    @FXML
-    private TextField codigoNamePro;
-
-    @FXML
-    private TextField codigoPro;
-
-    @FXML
-    private TableColumn<?, ?> colAcreditada;
-
-    @FXML
-    private TableColumn<?, ?> colAsignaturaEst;
-
-    @FXML
-    private TableColumn<?, ?> colCodigo;
-
-    @FXML
-    private TableColumn<?, ?> colNombre;
-
-    @FXML
-    private TableColumn<?, ?> colOnline;
-
-    @FXML
-    private TableColumn<?, ?> colPresencial;
-
-    @FXML
-    private TableColumn<?, ?> colProfesorEst;
-
-    @FXML
-    private ComboBox<?> comboAño;
-
-    @FXML
-    private ComboBox<?> comboPeriodo;
-
-    @FXML
-    private ComboBox<?> comboProgr;
-
-    @FXML
-    private Button eliminarEst;
-
-    @FXML
     private Button eliminarPrograma;
-
-    @FXML
-    private CheckBox estudianteFemenino;
-
-    @FXML
-    private ImageView estudiantesImg;
-
-    @FXML
-    private CheckBox estuidianteMasculino;
-
-    @FXML
-    private Pane gestionEstudiante;
 
     @FXML
     private Pane gestionPrograma;
 
     @FXML
-    private Button guardarEst;
-
-    @FXML
-    private Button guardarPrograma;
-
-    @FXML
     private ImageView imagePrincipal;
-
-    @FXML
-    private ImageView imgFoto;
 
     @FXML
     private MenuBar menuBar;
@@ -120,135 +39,185 @@ public class ManuPrincipalController {
     private Menu menuConsulta;
 
     @FXML
-    private MenuItem menuGestion1;
-
-    @FXML
-    private MenuItem menuGestion2;
-
-    @FXML
     private MenuItem menuPrincipal;
-
     @FXML
-    private TableView<?> misProgramas;
-
+    private Button Create_City;
     @FXML
-    private Button modificarEst;
-
+    private Button Update_City;
     @FXML
-    private Button modificarPrograma;
-
+    private TextField ID_City;
     @FXML
-    private Button nextEst;
-
+    private TextField Name_City;
     @FXML
-    private TextField nombreEstudiante;
-
+    private TextField Code_City;
     @FXML
-    private Button nuevaFotoEst;
-
+    private TextField District_City;
     @FXML
-    private Button nuevoEst;
-
+    private TextField Pop_City;
     @FXML
-    private Button nuevoPrograma;
-
+    private Pane gestionPrograma1;
     @FXML
-    private TableView<?> tablaInscripcionesEst;
-
+    private ImageView carrerasImg1;
     @FXML
-    private Button todosEst;
-
+    private TextField Code_Country;
     @FXML
+    private TextField Name_Country;
+    @FXML
+    private TextField Continent_Country;
+    @FXML
+    private TextField Region_Country;
+    @FXML
+    private TextField SA_Country;
+    @FXML
+    private TextField Code2_Country;
+    @FXML
+    private TextField Pop_Country;
+    @FXML
+    private TextField Life_Country;
+    @FXML
+    private TextField GNP_Country;
+    @FXML
+    private TextField GNP_Old_Country;
+    @FXML
+    private TextField Local_Country;
+    @FXML
+    private TextField Gov_Country;
+    @FXML
+    private TextField Capital_Country;
+    @FXML
+    private TextField Head_Country;
+    @FXML
+    private Button CreateCountry;
+    @FXML
+    private Button UpdateCountry;
+    @FXML
+    private Button DeleteCountry;
+    @FXML
+    private Pane gestionPrograma2;
+    @FXML
+    private Button Create_CL;
+    @FXML
+    private Button Update_CL;
+    @FXML
+    private Button Delete_CL;
+    @FXML
+    private TextField CountryCode_CL;
+    @FXML
+    private TextField Language_CL;
+    @FXML
+    private TextField Official_CL;
+    @FXML
+    private TextField Perc_CL;
+    @FXML
+    private Pane gestionPrograma11;
+    @FXML
+    private TextField Code_Country1;
+    @FXML
+    private Button CreateCountry1;
+    @FXML
+    private Button UpdateCountry1;
+    @FXML
+    private Button DeleteCountry1;
+    @FXML
+    private MenuItem MoveCity;
+    @FXML
+    private MenuItem MoveCountry;
+    @FXML
+    private MenuItem MoveCL;
+    @FXML
+    private MenuItem MoveOperaciones;
+
+    @Deprecated
     void buscarFoto(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void displaySelectedProgram(MouseEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doAction2(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doAction4(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doBackEst(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doBuscarEst(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doBuscarPrograma(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doCargarTodos(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doEliminarEst(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doEliminarPrograma(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doGuardarEst(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doGuardarPrograma(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doModificarEst(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doModificarPrograma(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doNextEst(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doNuevoEst(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doNuevoPrograma(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doOpcion1(ActionEvent event) {
 
     }
 
-    @FXML
+    @Deprecated
     void doPeriodo(ActionEvent event) {
 
     }
@@ -258,9 +227,64 @@ public class ManuPrincipalController {
 
     }
 
-    @FXML
+    @Deprecated
     void doYear(ActionEvent event) {
 
     }
 
+    @FXML
+    public void doCreateCity(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doUpdateCity(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doDeleteCity(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doCreate_CL(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doUpdate_CL(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doDelete_CL(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doCreateCountry(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doUpdateCountry(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doDeleteCountry(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doMenu(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doCity(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doCountry(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doCL(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doOperations(ActionEvent actionEvent) {
+    }
 }
