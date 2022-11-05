@@ -595,20 +595,20 @@ public class ManuPrincipalController implements Initializable {
             ResultSet rs = pst.executeQuery();
             {
                 while (rs.next()) {
-                    City st = new City();
-                    st.setId(rs.getString("CountryCode"));
-                    st.setName(rs.getString("Language"));
-                    st.setDistrict(rs.getString("IsOfficial"));
-                    st.setCountry_code(rs.getString("Percentage"));
+                    CountryLanguage st = new CountryLanguage();
+                    st.setCountry_code(rs.getString("CountryCode"));
+                    st.setLenguage(rs.getString("Language"));
+                    st.setIs_official(rs.getString("IsOfficial"));
+                    st.setPercentage(rs.getString("Percentage"));
                     CL.add(st);
                 }
             }
 
             table_country_language.setItems(CL);
-            country_code_col.setCellValueFactory(f -> f.getValue().idProperty());
-            language_col.setCellValueFactory(f -> f.getValue().namProperty());
-            official_col.setCellValueFactory(f -> f.getValue().dStringProperty());
-            perc_col.setCellValueFactory(f -> f.getValue().codeProperty());
+            language_col.setCellValueFactory(f -> f.getValue().languageProperty());
+            official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
+            perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
+            country_code_col.setCellValueFactory(f -> f.getValue().cProperty());
         }
 
         catch (SQLException ex) {
@@ -616,14 +616,14 @@ public class ManuPrincipalController implements Initializable {
         }
 
         table_country_language.setRowFactory(tv -> {
-            TableRow<City> myRow = new TableRow<>();
+            TableRow<CountryLanguage> myRow = new TableRow<>();
             myRow.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1 && (!myRow.isEmpty())) {
                     myIndex = table_country_language.getSelectionModel().getSelectedIndex();
                     id_s = (String.valueOf(table_country_language.getItems().get(myIndex).getCountry_code()));
                     CountryCode_CL.setText(table_country_language.getItems().get(myIndex).getCountry_code());
                     Language_CL.setText(table_country_language.getItems().get(myIndex).getLanguage());
-                    Official_CL.setText(table_country_language.getItems().get(myIndex).isIs_official());
+                    Official_CL.setText(table_country_language.getItems().get(myIndex).getIs_official());
                     Perc_CL.setText(table_country_language.getItems().get(myIndex).getPercentage());
                 }
             });
@@ -820,7 +820,7 @@ public class ManuPrincipalController implements Initializable {
     @FXML
     void doUpdate_CL(ActionEvent event) {
         myIndex = table_country_language.getSelectionModel().getSelectedIndex();
-        id_s = Integer.parseInt(String.valueOf(table_country_language.getItems().get(myIndex).getId()));
+        id_s = (String.valueOf(table_country_language.getItems().get(myIndex).getCountry_code()));
 
         String code_CL, language_CL, official_CL, perc_CL;
 
