@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="402.0" prefWidth="1464.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLERS.ManuPrincipalController">
    <children>
-      <Pane fx:id="doMenu" layoutX="8.0" layoutY="38.0" prefHeight="413.0" prefWidth="1443.0" style="-fx-border-radius: 10; -fx-border-color: #000000; -fx-background-color: #bfb7bf;" visible="false">
+      <Pane fx:id="doMenu" layoutX="8.0" layoutY="38.0" prefHeight="413.0" prefWidth="1443.0" style="-fx-border-radius: 10; -fx-border-color: #000000; -fx-background-color: #bfb7bf;">
          <children>
             <Label fx:id="doM" alignment="CENTER" layoutX="22.0" layoutY="7.0" prefHeight="399.0" prefWidth="1392.0" text="PROYECTO BASE DE DATOS" textAlignment="CENTER">
                <font>
@@ -23,9 +23,9 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="gestionCountry" layoutX="-6.0" prefHeight="461.0" prefWidth="1473.0" style="-fx-background-color: #eb984e;" visible="false">
+      <Pane fx:id="gestionCountry" layoutX="-6.0" layoutY="30.0" prefHeight="431.0" prefWidth="1473.0" style="-fx-background-color: #eb984e;" visible="false">
          <children>
-            <Pane layoutX="10.0" layoutY="89.0" prefHeight="354.0" prefWidth="626.0" style="-fx-border-color: #17202a;">
+            <Pane layoutX="14.0" layoutY="69.0" prefHeight="354.0" prefWidth="626.0" style="-fx-border-color: #17202a;">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Code" textFill="WHITE">
                      <font>
@@ -113,14 +113,14 @@
                   <TextField fx:id="Head_Country" layoutX="461.0" layoutY="198.0" prefHeight="32.0" prefWidth="158.0" />
                </children>
             </Pane>
-            <Pane layoutX="107.0" layoutY="37.0" prefHeight="45.0" prefWidth="471.0" style="-fx-border-color: #17202a;">
+            <Pane layoutX="107.0" layoutY="14.0" prefHeight="45.0" prefWidth="471.0" style="-fx-border-color: #17202a;">
                <children>
                   <Button fx:id="CreateCountry" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#doCreateCountry" prefHeight="24.0" prefWidth="100.0" text="Create" />
                   <Button fx:id="UpdateCountry" layoutX="186.0" layoutY="10.0" mnemonicParsing="false" onAction="#doUpdateCountry" prefHeight="24.0" prefWidth="100.0" text="Update" />
                   <Button fx:id="DeleteCountry" layoutX="351.0" layoutY="10.0" mnemonicParsing="false" onAction="#doDeleteCountry" prefHeight="24.0" prefWidth="100.0" text="Delete" />
                </children>
             </Pane>
-            <TableView layoutX="642.0" layoutY="89.0" prefHeight="354.0" prefWidth="821.0">
+            <TableView layoutX="646.0" layoutY="69.0" prefHeight="354.0" prefWidth="821.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="C1" />
                 <TableColumn prefWidth="75.0" text="C2" />
@@ -128,7 +128,7 @@
             </TableView>
          </children>
       </Pane>
-      <Pane fx:id="gestionCL" prefHeight="461.0" prefWidth="1464.0" style="-fx-background-color: #eb984e;" visible="false">
+      <Pane fx:id="gestionCL" layoutY="30.0" prefHeight="431.0" prefWidth="1464.0" style="-fx-background-color: #eb984e;" visible="false">
          <children>
             <Pane layoutX="8.0" layoutY="162.0" prefHeight="178.0" prefWidth="122.0" style="-fx-border-color: #17202a;">
                <children>
@@ -137,7 +137,7 @@
                   <Button fx:id="Delete_CL" layoutX="9.0" layoutY="127.0" mnemonicParsing="false" onAction="#doDelete_CL" prefHeight="38.0" prefWidth="100.0" text="Delete" />
                </children>
             </Pane>
-            <Pane layoutX="136.0" layoutY="89.0" prefHeight="362.0" prefWidth="497.0" style="-fx-border-color: #17202a;">
+            <Pane layoutX="138.0" layoutY="61.0" prefHeight="362.0" prefWidth="497.0" style="-fx-border-color: #17202a;">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Country Code" textFill="WHITE">
                      <font>
@@ -165,7 +165,7 @@
                   <TextField fx:id="Perc_CL" layoutX="133.0" layoutY="310.0" prefHeight="32.0" prefWidth="267.0" />
                </children>
             </Pane>
-            <TableView layoutX="646.0" layoutY="89.0" prefHeight="362.0" prefWidth="803.0">
+            <TableView layoutX="647.0" layoutY="61.0" prefHeight="362.0" prefWidth="803.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="C1" />
                 <TableColumn prefWidth="75.0" text="C2" />
@@ -173,7 +173,7 @@
             </TableView>
          </children>
       </Pane>
-      <Pane fx:id="gestionCity" layoutX="-7.0" layoutY="-4.0" prefHeight="461.0" prefWidth="1470.0" style="-fx-background-color: #eb984e;">
+      <Pane fx:id="gestionCity" layoutX="-7.0" layoutY="32.0" prefHeight="425.0" prefWidth="1470.0" style="-fx-background-color: #eb984e;" visible="false">
          <children>
             <Pane layoutX="14.0" layoutY="214.0" prefHeight="178.0" prefWidth="122.0" style="-fx-border-color: #17202a;">
                <children>
@@ -181,7 +181,7 @@
                   <Button fx:id="Update_City" layoutX="9.0" layoutY="69.0" mnemonicParsing="false" onAction="#doUpdateCity" prefHeight="38.0" prefWidth="100.0" text="Update" />
                   <Button fx:id="eliminarPrograma" layoutX="9.0" layoutY="127.0" mnemonicParsing="false" onAction="#doDeleteCity" prefHeight="38.0" prefWidth="100.0" text="Delete" />
                </children></Pane>
-            <Pane layoutX="146.0" layoutY="93.0" prefHeight="354.0" prefWidth="497.0" style="-fx-border-color: #17202a;">
+            <Pane layoutX="146.0" layoutY="60.0" prefHeight="354.0" prefWidth="497.0" style="-fx-border-color: #17202a;">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="ID" textFill="WHITE">
                      <font>
@@ -215,7 +215,7 @@
                   <TextField fx:id="Pop_City" layoutX="131.0" layoutY="310.0" prefHeight="32.0" prefWidth="272.0" />
                </children>
             </Pane>
-            <TableView fx:id="table_city" layoutX="661.0" layoutY="93.0" prefHeight="354.0" prefWidth="803.0">
+            <TableView fx:id="table_city" layoutX="660.0" layoutY="60.0" prefHeight="354.0" prefWidth="803.0">
               <columns>
                 <TableColumn fx:id="id_col" prefWidth="85.0" text="ID" />
                 <TableColumn fx:id="name_col" prefWidth="254.0" text="Name" />
@@ -226,9 +226,9 @@
             </TableView>
          </children>
       </Pane>
-      <Pane fx:id="gestionOperaciones" layoutX="-2.0" prefHeight="461.0" prefWidth="1470.0" style="-fx-background-color: #eb984e;" visible="false">
+      <Pane fx:id="gestionOperaciones" layoutX="-2.0" layoutY="30.0" prefHeight="431.0" prefWidth="1470.0" style="-fx-background-color: #eb984e;">
          <children>
-            <Pane layoutX="8.0" layoutY="97.0" prefHeight="354.0" prefWidth="683.0" style="-fx-border-color: #17202a;">
+            <Pane layoutX="6.0" layoutY="71.0" prefHeight="354.0" prefWidth="683.0" style="-fx-border-color: #17202a;">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Code" textFill="WHITE">
                      <font>
@@ -244,7 +244,7 @@
                   </TableView>
                </children>
             </Pane>
-            <Pane layoutX="105.0" layoutY="47.0" prefHeight="34.0" prefWidth="471.0" style="-fx-border-color: #17202a;">
+            <Pane layoutX="97.0" layoutY="14.0" prefHeight="34.0" prefWidth="471.0" style="-fx-border-color: #17202a;">
                <children>
                   <Button fx:id="CreateCountry1" layoutX="12.0" layoutY="5.0" mnemonicParsing="false" onAction="#doCreateCountry" prefHeight="24.0" prefWidth="100.0" text="Create" />
                   <Button fx:id="UpdateCountry1" layoutX="177.0" layoutY="6.0" mnemonicParsing="false" onAction="#doUpdateCountry" prefHeight="24.0" prefWidth="100.0" text="Update" />

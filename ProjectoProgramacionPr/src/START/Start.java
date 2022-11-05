@@ -19,28 +19,25 @@ public class Start extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
     @Override
     public void start(Stage Ventana) throws Exception {
-        
+
         Parent root = FXMLLoader.load(getClass().getResource("/VISTA/menuPrincipal.fxml"));
-        
-        Scene scene =  new Scene(root);
-        
+
+        Scene scene = new Scene(root);
+
         Ventana.setScene(scene);
-        
+
         Ventana.setTitle("PROYECTO DB");
-        
-        //Ventana.SetOnCloserequest(event -> )
+
+        // Ventana.SetOnCloserequest(event -> )
         Ventana.setResizable(false);
-        
+
         Ventana.show();
-        
-        //______________________IMAGENES____________________________________
-        
-        
+
+        // ______________________IMAGENES____________________________________
+
     }
-    
-    
-    
+
 }

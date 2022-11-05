@@ -2,6 +2,7 @@ package CONTROLLERS;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -13,7 +14,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
+
+import java.net.URL;
 import java.sql.*;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +27,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableRow;
 
-public class ManuPrincipalController {
+public class ManuPrincipalController implements Initializable {
 
     @FXML
     private TextField Capital_Country;
@@ -201,11 +205,11 @@ public class ManuPrincipalController {
     public void Connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/World", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/world", "root", "terrans94");
         } catch (ClassNotFoundException ex) {
 
         } catch (SQLException ex) {
-
+            ex.printStackTrace();
         }
     }
 
@@ -267,6 +271,7 @@ public class ManuPrincipalController {
             District_City.setText("");
             Pop_City.setText("");
             ID_City.requestFocus();
+
         } catch (SQLException ex) {
             Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -276,7 +281,7 @@ public class ManuPrincipalController {
         Connect();
         ObservableList<City> city = FXCollections.observableArrayList();
         try {
-            pst = con.prepareStatement("select ID,Name,CountryCode,District,Population from city");
+            pst = con.prepareStatement("select ID,Name,CountryCode,District,Population from city;");
             ResultSet rs = pst.executeQuery();
             {
                 while (rs.next()) {
@@ -284,7 +289,7 @@ public class ManuPrincipalController {
                     st.setId(rs.getString("ID"));
                     st.setName(rs.getString("Name"));
                     st.setDistrict(rs.getString("District"));
-                    st.setCountry_code(rs.getString("Country Code"));
+                    st.setCountry_code(rs.getString("CountryCode"));
                     st.setPopulation(rs.getString("Population"));
                     city.add(st);
                 }
@@ -433,6 +438,12 @@ public class ManuPrincipalController {
     @FXML
     void doUpdate_CL(ActionEvent event) {
 
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        Connect();
+        table_city();
     }
 
 }
