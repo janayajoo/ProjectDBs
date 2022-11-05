@@ -1,53 +1,62 @@
 package MODELO;
 
+import com.mysql.cj.conf.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class CountryLanguage {
-    private String country_code, language;
-    private float percentage;
-    private boolean is_official;
+    private final StringProperty country_code;
+    private final StringProperty language;
+    private final StringProperty percentage;
+    private final StringProperty is_official;
 
     public CountryLanguage() {
-        this.country_code = "";
-        this.language = "";
-        this.percentage = 0;
-        this.is_official = false;
-    }
-
-    public CountryLanguage(String country_code, String language, float percentage, boolean is_official) {
-        this.country_code = country_code;
-        this.language = language;
-        this.percentage = percentage;
-        this.is_official = is_official;
+        country_code = new SimpleStringProperty(this, "country_code");
+        language = new SimpleStringProperty(this, "language");
+        percentage = new SimpleStringProperty(this, "percentage");
+        is_official = new SimpleStringProperty(this, "is_official")
     }
 
     public String getCountry_code() {
-        return country_code;
+        return country_code.get();
     }
-
-    public void setCountry_code(String country_code) {
-        this.country_code = country_code;
+    public void setCountry_code(String newcountry_code) {
+        country_code.set(newcountry_code);
     }
 
     public String getLanguage() {
+        return language.get();
+    }
+    public void setLenguage(String newlanguage) {
+        language.set(newlanguage);
+    }
+
+    public String getPercentage() {
+        return percentage.get();
+    }
+    public void setPercentage(String newpercentage) {
+        percentage.set(newpercentage);
+    }
+
+    public String getIs_official() {
+        return is_official.get();
+    }
+    public void setIs_official(String newis_official) {
+        is_official.set(newis_official);
+    }
+
+    public StringProperty country_codeProperty() {
+        return country_code;
+    }
+
+    public StringProperty languageProperty() {
         return language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public float getPercentage() {
+    public StringProperty percentageProperty() {
         return percentage;
     }
 
-    public void setPercentage(float percentage) {
-        this.percentage = percentage;
-    }
-
-    public boolean isIs_official() {
+    public StringProperty is_officialProperty() {
         return is_official;
-    }
-
-    public void setIs_official(boolean is_official) {
-        this.is_official = is_official;
     }
 }
