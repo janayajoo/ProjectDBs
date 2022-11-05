@@ -126,7 +126,7 @@
                   <Button fx:id="DeleteCountry" layoutX="351.0" layoutY="10.0" mnemonicParsing="false" onAction="#doDeleteCountry" prefHeight="24.0" prefWidth="100.0" text="Delete" />
                </children>
             </Pane>
-            <TableView layoutX="646.0" layoutY="69.0" prefHeight="354.0" prefWidth="821.0">
+            <TableView fx:id="table_country" layoutX="646.0" layoutY="69.0" prefHeight="354.0" prefWidth="821.0">
               <columns>
                 <TableColumn fx:id="code_country_col" prefWidth="75.0" text="Code" />
                 <TableColumn fx:id="name_country_col" prefWidth="75.0" text="Name" />

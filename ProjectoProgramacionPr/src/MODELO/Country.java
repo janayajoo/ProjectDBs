@@ -1,30 +1,31 @@
 package MODELO;
 
-import com.mysql.cj.conf.StringProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Country {
-    //private String code, name, continent, region, local_name, government_form, head_state, code2;
-    //private float surface_area, life_expectancy, gnp, gnp_old;
-    //private int indep_year, population, capital;
+    // private String code, name, continent, region, local_name, government_form,
+    // head_state, code2;
+    // private float surface_area, life_expectancy, gnp, gnp_old;
+    // private int indep_year, population, capital;
 
-    //public Country() {
-    //    this.code = "";
-    //    this.name = "";
-    //    this.continent = "";
-    //    this.region = "";
-    //    this.local_name = "";
-    //    this.government_form = "";
-    //    this.head_state = "";
-    //    this.code2 = "";
-    //    this.surface_area = 0;
-    //    this.life_expectancy = 0;
-    //    this.gnp = 0;
-    //    this.gnp_old = 0;
-    //    this.indep_year = 0;
-    //    this.population = 0;
-    //    this.capital = 0;
-    //}
+    // public Country() {
+    // this.code = "";
+    // this.name = "";
+    // this.continent = "";
+    // this.region = "";
+    // this.local_name = "";
+    // this.government_form = "";
+    // this.head_state = "";
+    // this.code2 = "";
+    // this.surface_area = 0;
+    // this.life_expectancy = 0;
+    // this.gnp = 0;
+    // this.gnp_old = 0;
+    // this.indep_year = 0;
+    // this.population = 0;
+    // this.capital = 0;
+    // }
 
     private final StringProperty code;
     private final StringProperty name;
@@ -44,26 +45,27 @@ public class Country {
 
     public Country() {
 
-        code = new StringProperty(this, "code");
-        name = new StringProperty(this, "name");
-        continent = new StringProperty(this, "continent");
-        region = new StringProperty(this, "region");
-        local_name = new StringProperty(this, "local_name");
-        government_form = new StringProperty(this, "government_form");
-        head_state = new StringProperty(this, "head_state");
-        code2 = new StringProperty(this, "code2");
-        surface_area = new StringProperty(this, "surface_area");
-        life_expectancy = new StringProperty(this, "life_expectancy");
-        gnp = new StringProperty(this, "gnp");
-        gnp_old = new StringProperty(this, "gnp_old");
-        indep_year = new StringProperty(this, "indep_year");
-        population = new StringProperty(this, "population");
-        capital = new StringProperty(this, "capital");
+        code = new SimpleStringProperty(this, "code");
+        name = new SimpleStringProperty(this, "name");
+        continent = new SimpleStringProperty(this, "continent");
+        region = new SimpleStringProperty(this, "region");
+        local_name = new SimpleStringProperty(this, "local_name");
+        government_form = new SimpleStringProperty(this, "government_form");
+        head_state = new SimpleStringProperty(this, "head_state");
+        code2 = new SimpleStringProperty(this, "code2");
+        surface_area = new SimpleStringProperty(this, "surface_area");
+        life_expectancy = new SimpleStringProperty(this, "life_expectancy");
+        gnp = new SimpleStringProperty(this, "gnp");
+        gnp_old = new SimpleStringProperty(this, "gnp_old");
+        indep_year = new SimpleStringProperty(this, "indep_year");
+        population = new SimpleStringProperty(this, "population");
+        capital = new SimpleStringProperty(this, "capital");
     }
 
     public String getCode() {
         return code.get();
     }
+
     public void setCode(String newcode) {
         code.set(newcode);
     }
@@ -71,6 +73,7 @@ public class Country {
     public String getName() {
         return name.get();
     }
+
     public void setName(String newname) {
         name.set(newname);
     }
@@ -78,6 +81,7 @@ public class Country {
     public String getContinent() {
         return continent.get();
     }
+
     public void setContinent(String newcontinent) {
         continent.set(newcontinent);
     }
@@ -85,6 +89,7 @@ public class Country {
     public String getRegion() {
         return region.get();
     }
+
     public void setRegion(String newregion) {
         region.set(newregion);
     }
@@ -92,6 +97,7 @@ public class Country {
     public String getLocal_name() {
         return local_name.get();
     }
+
     public void setLocal_name(String newlocal_name) {
         local_name.set(newlocal_name);
     }
@@ -99,6 +105,7 @@ public class Country {
     public String getGovernment_form() {
         return government_form.get();
     }
+
     public void setGovernment_form(String newgovernment_form) {
         government_form.set(newgovernment_form);
     }
@@ -106,6 +113,7 @@ public class Country {
     public String getHead_state() {
         return head_state.get();
     }
+
     public void setHead_state(String newhead_state) {
         head_state.set(newhead_state);
     }
@@ -113,6 +121,7 @@ public class Country {
     public String getCode2() {
         return code2.get();
     }
+
     public void setCode2(String newcode2) {
         code2.set(newcode2);
     }
@@ -120,6 +129,7 @@ public class Country {
     public String getSurface_area() {
         return surface_area.get();
     }
+
     public void setSurface_area(String newsurface_area) {
         surface_area.set(newsurface_area);
     }
@@ -127,6 +137,7 @@ public class Country {
     public String getLife_expectancy() {
         return life_expectancy.get();
     }
+
     public void setLife_expectancy(String newlife_expectancy) {
         life_expectancy.set(newlife_expectancy);
     }
@@ -134,6 +145,7 @@ public class Country {
     public String getGnp() {
         return gnp.get();
     }
+
     public void setGnp(String newgnp) {
         gnp.set(newgnp);
     }
@@ -141,6 +153,7 @@ public class Country {
     public String getGnp_old() {
         return gnp_old.get();
     }
+
     public void setGnp_old(String newgnp_old) {
         gnp_old.set(newgnp_old);
     }
@@ -148,6 +161,7 @@ public class Country {
     public String getIndep_year() {
         return indep_year.get();
     }
+
     public void setIndep_year(String newindep_year) {
         indep_year.set(newindep_year);
     }
@@ -155,6 +169,7 @@ public class Country {
     public String getPopulation() {
         return population.get();
     }
+
     public void setPopulation(String newpopulation) {
         population.set(newpopulation);
     }
@@ -162,10 +177,14 @@ public class Country {
     public String getCapital() {
         return capital.get();
     }
+
     public void setCapital(String newcapital) {
         capital.set(newcapital);
     }
 
+    public StringProperty codeProperty() {
+        return code;
+    }
 
     public StringProperty nameProperty() {
         return name;
