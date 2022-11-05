@@ -1,163 +1,225 @@
 package MODELO;
 
+import com.mysql.cj.conf.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class Country {
-    private String code, name, continent, region, local_name, government_form, head_state, code2;
-    private float surface_area, life_expectancy, gnp, gnp_old;
-    private int indep_year, population, capital;
+    //private String code, name, continent, region, local_name, government_form, head_state, code2;
+    //private float surface_area, life_expectancy, gnp, gnp_old;
+    //private int indep_year, population, capital;
+
+    //public Country() {
+    //    this.code = "";
+    //    this.name = "";
+    //    this.continent = "";
+    //    this.region = "";
+    //    this.local_name = "";
+    //    this.government_form = "";
+    //    this.head_state = "";
+    //    this.code2 = "";
+    //    this.surface_area = 0;
+    //    this.life_expectancy = 0;
+    //    this.gnp = 0;
+    //    this.gnp_old = 0;
+    //    this.indep_year = 0;
+    //    this.population = 0;
+    //    this.capital = 0;
+    //}
+
+    private final StringProperty code;
+    private final StringProperty name;
+    private final StringProperty continent;
+    private final StringProperty region;
+    private final StringProperty local_name;
+    private final StringProperty government_form;
+    private final StringProperty head_state;
+    private final StringProperty code2;
+    private final StringProperty surface_area;
+    private final StringProperty life_expectancy;
+    private final StringProperty gnp;
+    private final StringProperty gnp_old;
+    private final StringProperty indep_year;
+    private final StringProperty population;
+    private final StringProperty capital;
 
     public Country() {
-        this.code = "";
-        this.name = "";
-        this.continent = "";
-        this.region = "";
-        this.local_name = "";
-        this.government_form = "";
-        this.head_state = "";
-        this.code2 = "";
-        this.surface_area = 0;
-        this.life_expectancy = 0;
-        this.gnp = 0;
-        this.gnp_old = 0;
-        this.indep_year = 0;
-        this.population = 0;
-        this.capital = 0;
-    }
 
-    public Country(String code, String name, String continent, String region, String local_name, String government_form, String head_state, String code2, float surface_area, float life_expectancy, float gnp, float gnp_old, int indep_year, int population, int capital) {
-        this.code = code;
-        this.name = name;
-        this.continent = continent;
-        this.region = region;
-        this.local_name = local_name;
-        this.government_form = government_form;
-        this.head_state = head_state;
-        this.code2 = code2;
-        this.surface_area = surface_area;
-        this.life_expectancy = life_expectancy;
-        this.gnp = gnp;
-        this.gnp_old = gnp_old;
-        this.indep_year = indep_year;
-        this.population = population;
-        this.capital = capital;
+        code = new StringProperty(this, "code");
+        name = new StringProperty(this, "name");
+        continent = new StringProperty(this, "continent");
+        region = new StringProperty(this, "region");
+        local_name = new StringProperty(this, "local_name");
+        government_form = new StringProperty(this, "government_form");
+        head_state = new StringProperty(this, "head_state");
+        code2 = new StringProperty(this, "code2");
+        surface_area = new StringProperty(this, "surface_area");
+        life_expectancy = new StringProperty(this, "life_expectancy");
+        gnp = new StringProperty(this, "gnp");
+        gnp_old = new StringProperty(this, "gnp_old");
+        indep_year = new StringProperty(this, "indep_year");
+        population = new StringProperty(this, "population");
+        capital = new StringProperty(this, "capital");
     }
 
     public String getCode() {
-        return code;
+        return code.get();
     }
-
-    public void setCode(String code) {
-        this.code = code;
+    public void setCode(String newcode) {
+        code.set(newcode);
     }
 
     public String getName() {
-        return name;
+        return name.get();
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String newname) {
+        name.set(newname);
     }
 
     public String getContinent() {
-        return continent;
+        return continent.get();
     }
-
-    public void setContinent(String continent) {
-        this.continent = continent;
+    public void setContinent(String newcontinent) {
+        continent.set(newcontinent);
     }
 
     public String getRegion() {
-        return region;
+        return region.get();
     }
-
-    public void setRegion(String region) {
-        this.region = region;
+    public void setRegion(String newregion) {
+        region.set(newregion);
     }
 
     public String getLocal_name() {
-        return local_name;
+        return local_name.get();
     }
-
-    public void setLocal_name(String local_name) {
-        this.local_name = local_name;
+    public void setLocal_name(String newlocal_name) {
+        local_name.set(newlocal_name);
     }
 
     public String getGovernment_form() {
-        return government_form;
+        return government_form.get();
     }
-
-    public void setGovernment_form(String government_form) {
-        this.government_form = government_form;
+    public void setGovernment_form(String newgovernment_form) {
+        government_form.set(newgovernment_form);
     }
 
     public String getHead_state() {
-        return head_state;
+        return head_state.get();
     }
-
-    public void setHead_state(String head_state) {
-        this.head_state = head_state;
+    public void setHead_state(String newhead_state) {
+        head_state.set(newhead_state);
     }
 
     public String getCode2() {
+        return code2.get();
+    }
+    public void setCode2(String newcode2) {
+        code2.set(newcode2);
+    }
+
+    public String getSurface_area() {
+        return surface_area.get();
+    }
+    public void setSurface_area(String newsurface_area) {
+        surface_area.set(newsurface_area);
+    }
+
+    public String getLife_expectancy() {
+        return life_expectancy.get();
+    }
+    public void setLife_expectancy(String newlife_expectancy) {
+        life_expectancy.set(newlife_expectancy);
+    }
+
+    public String getGnp() {
+        return gnp.get();
+    }
+    public void setGnp(String newgnp) {
+        gnp.set(newgnp);
+    }
+
+    public String getGnp_old() {
+        return gnp_old.get();
+    }
+    public void setGnp_old(String newgnp_old) {
+        gnp_old.set(newgnp_old);
+    }
+
+    public String getIndep_year() {
+        return indep_year.get();
+    }
+    public void setIndep_year(String newindep_year) {
+        indep_year.set(newindep_year);
+    }
+
+    public String getPopulation() {
+        return population.get();
+    }
+    public void setPopulation(String newpopulation) {
+        population.set(newpopulation);
+    }
+
+    public String getCapital() {
+        return capital.get();
+    }
+    public void setCapital(String newcapital) {
+        capital.set(newcapital);
+    }
+
+
+    public StringProperty nameProperty() {
+        return name;
+    }
+
+    public StringProperty continentPropoerty() {
+        return continent;
+    }
+
+    public StringProperty regionProperty() {
+        return region;
+    }
+
+    public StringProperty local_nameProperty() {
+        return local_name;
+    }
+
+    public StringProperty government_formProperty() {
+        return government_form;
+    }
+
+    public StringProperty head_stateProperty() {
+        return head_state;
+    }
+
+    public StringProperty code2Property() {
         return code2;
     }
 
-    public void setCode2(String code2) {
-        this.code2 = code2;
-    }
-
-    public float getSurface_area() {
+    public StringProperty surface_areaProperty() {
         return surface_area;
     }
 
-    public void setSurface_area(float surface_area) {
-        this.surface_area = surface_area;
-    }
-
-    public float getLife_expectancy() {
+    public StringProperty life_expectancyProperty() {
         return life_expectancy;
     }
 
-    public void setLife_expectancy(float life_expectancy) {
-        this.life_expectancy = life_expectancy;
-    }
-
-    public float getGnp() {
+    public StringProperty gnpProperty() {
         return gnp;
     }
 
-    public void setGnp(float gnp) {
-        this.gnp = gnp;
-    }
-
-    public float getGnp_old() {
+    public StringProperty gnp_oldProperty() {
         return gnp_old;
     }
 
-    public void setGnp_old(float gnp_old) {
-        this.gnp_old = gnp_old;
-    }
-
-    public int getIndep_year() {
+    public StringProperty indep_yearProperty() {
         return indep_year;
     }
 
-    public void setIndep_year(int indep_year) {
-        this.indep_year = indep_year;
-    }
-
-    public int getPopulation() {
+    public StringProperty populationProperty() {
         return population;
     }
 
-    public void setPopulation(int population) {
-        this.population = population;
-    }
-
-    public int getCapital() {
+    public StringProperty capitalProperty() {
         return capital;
-    }
-
-    public void setCapital(int capital) {
-        this.capital = capital;
     }
 }

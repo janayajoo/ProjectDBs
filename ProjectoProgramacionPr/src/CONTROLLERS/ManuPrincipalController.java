@@ -205,7 +205,7 @@ public class ManuPrincipalController implements Initializable {
     public void Connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/world", "root", "terrans94");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/world", "root", "12345");
         } catch (ClassNotFoundException ex) {
 
         } catch (SQLException ex) {
