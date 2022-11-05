@@ -680,7 +680,25 @@ public class ManuPrincipalController implements Initializable {
 
     @FXML
     void doDelete_CL(ActionEvent event) {
+        myIndex = table_country_language.getSelectionModel().getSelectedIndex();
+        id_s = (String.valueOf(table_country_language.getItems().get(myIndex).getCountry_code()));
 
+        try {
+            pst = con.prepareStatement("delete from country where id = ? ");
+            pst.setString(1, id_s);
+            pst.executeUpdate();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Country Language Registation");
+
+            alert.setHeaderText("Country Language Registation");
+            alert.setContentText("Deleted!");
+
+            alert.showAndWait();
+            table_country_language();
+        } catch (SQLException ex) {
+            Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -801,7 +819,35 @@ public class ManuPrincipalController implements Initializable {
 
     @FXML
     void doUpdate_CL(ActionEvent event) {
+        myIndex = table_country_language.getSelectionModel().getSelectedIndex();
+        id_s = Integer.parseInt(String.valueOf(table_country_language.getItems().get(myIndex).getId()));
 
+        String code_CL, language_CL, official_CL, perc_CL;
+
+        code_CL = CountryCode_CL.getText();
+        language_CL = Language_CL.getText();
+        official_CL = Official_CL.getText();
+        perc_CL = Perc_CL.getText();
+
+        try {
+            pst = con.prepareStatement(
+                    "update CountryLanguage set Language = ? ,IsOfficial = ?, Percentage = ? where CountryCode = ? ");
+            pst.setString(4, code_CL);
+            pst.setString(1, language_CL);
+            pst.setString(2, official_CL);
+            pst.setString(3, perc_CL);
+            pst.executeUpdate();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Country Language Registation");
+
+            alert.setHeaderText("Country Language Registation");
+            alert.setContentText("Updated!");
+
+            alert.showAndWait();
+            table_country_language();
+        } catch (SQLException ex) {
+            Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
