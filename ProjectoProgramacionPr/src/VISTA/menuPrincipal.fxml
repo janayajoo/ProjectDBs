@@ -23,7 +23,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="gestionCountry" layoutX="-6.0" layoutY="30.0" prefHeight="431.0" prefWidth="1473.0" style="-fx-background-color: #eb984e;" visible="false">
+      <Pane fx:id="gestionCountry" layoutX="-6.0" layoutY="30.0" prefHeight="431.0" prefWidth="1473.0" style="-fx-background-color: #eb984e;">
          <children>
             <Pane layoutX="14.0" layoutY="69.0" prefHeight="354.0" prefWidth="626.0" style="-fx-border-color: #17202a;">
                <children>
@@ -56,7 +56,7 @@
                   <TextField fx:id="Name_Country" layoutX="134.0" layoutY="51.0" prefHeight="32.0" prefWidth="478.0" />
                   <TextField fx:id="Continent_Country" layoutX="135.0" layoutY="88.0" prefHeight="32.0" prefWidth="476.0" />
                   <TextField fx:id="Region_Country" layoutX="135.0" layoutY="125.0" prefHeight="32.0" prefWidth="479.0" />
-                  <TextField fx:id="SA_Country" layoutX="135.0" layoutY="162.0" prefHeight="32.0" prefWidth="482.0" />
+                  <TextField fx:id="SA_Country" layoutX="135.0" layoutY="162.0" prefHeight="32.0" prefWidth="196.0" />
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="13.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Code 2" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
@@ -111,6 +111,12 @@
                      </font>
                   </Label>
                   <TextField fx:id="Head_Country" layoutX="461.0" layoutY="198.0" prefHeight="32.0" prefWidth="158.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="164.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Indep Year" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="Indep_year" layoutX="455.0" layoutY="163.0" prefHeight="32.0" prefWidth="158.0" />
                </children>
             </Pane>
             <Pane layoutX="107.0" layoutY="14.0" prefHeight="45.0" prefWidth="471.0" style="-fx-border-color: #17202a;">
@@ -122,8 +128,21 @@
             </Pane>
             <TableView layoutX="646.0" layoutY="69.0" prefHeight="354.0" prefWidth="821.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="code_country_col" prefWidth="75.0" text="Code" />
+                <TableColumn fx:id="name_country_col" prefWidth="75.0" text="Name" />
+                  <TableColumn fx:id="cont_country_col" prefWidth="75.0" text="Continent" />
+                  <TableColumn fx:id="reg_country_col" prefWidth="75.0" text="Region" />
+                  <TableColumn fx:id="surface_country_col" prefWidth="75.0" text="Surface Area" />
+                  <TableColumn fx:id="indep_country_col" prefWidth="75.0" text="Indep Year" />
+                  <TableColumn fx:id="pop_country_col" prefWidth="75.0" text="Population" />
+                  <TableColumn fx:id="life_country_col" prefWidth="75.0" text="Life Expect" />
+                  <TableColumn fx:id="GNP_country_col" prefWidth="75.0" text="GNP" />
+                  <TableColumn fx:id="GNPO_country_col" prefWidth="75.0" text="GNP Old" />
+                  <TableColumn fx:id="local_country_col" prefWidth="75.0" text="Local Names" />
+                  <TableColumn fx:id="goverment_country_col" prefWidth="75.0" text="Goverment Form" />
+                  <TableColumn fx:id="head_country_col" prefWidth="75.0" text="Head of States" />
+                  <TableColumn fx:id="capital_country_col" prefWidth="75.0" text="Capital" />
+                  <TableColumn fx:id="code2_country_col" prefWidth="75.0" text="Code2" />
               </columns>
             </TableView>
          </children>
@@ -167,8 +186,10 @@
             </Pane>
             <TableView layoutX="647.0" layoutY="61.0" prefHeight="362.0" prefWidth="803.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="country_code_col" prefWidth="129.0" text="Country Code" />
+                <TableColumn fx:id="language_col" minWidth="0.0" prefWidth="258.0" text="Language" />
+                  <TableColumn fx:id="official_col" prefWidth="162.0" text="Is Official" />
+                  <TableColumn fx:id="perc_col" prefWidth="253.0" text="Percentage" />
               </columns>
             </TableView>
          </children>
@@ -226,7 +247,7 @@
             </TableView>
          </children>
       </Pane>
-      <Pane fx:id="gestionOperaciones" layoutX="-2.0" layoutY="30.0" prefHeight="431.0" prefWidth="1470.0" style="-fx-background-color: #eb984e;">
+      <Pane fx:id="gestionOperaciones" layoutX="-2.0" layoutY="30.0" prefHeight="431.0" prefWidth="1470.0" style="-fx-background-color: #eb984e;" visible="false">
          <children>
             <Pane layoutX="6.0" layoutY="71.0" prefHeight="354.0" prefWidth="683.0" style="-fx-border-color: #17202a;">
                <children>
