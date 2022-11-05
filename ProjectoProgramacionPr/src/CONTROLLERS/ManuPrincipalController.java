@@ -262,6 +262,9 @@ public class ManuPrincipalController implements Initializable {
     @FXML
     private TableView<Country> table_country;
 
+    @FXML
+    private TableView<CountryLanguage> table_country_language;
+
     Connection con;
     PreparedStatement pst;
     int myIndex;
@@ -548,6 +551,84 @@ public class ManuPrincipalController implements Initializable {
 
     @FXML
     void doCreate_CL(ActionEvent event) {
+        String code_CL, language_CL, official_CL, perc_CL;
+        code_CL = CountryCode_CL.getText();
+        language_CL = Language_CL.getText();
+        official_CL = Official_CL.getText();
+        perc_CL = Perc_CL.getText();
+
+        try {
+            pst = con.prepareStatement(
+                    "insert into countrylanguage (CountryCode,Language,IsOfficial,Percentage) values(?,?,?,?)");
+            pst.setString(1, code_CL);
+            pst.setString(2, language_CL);
+            pst.setString(3, official_CL);
+            pst.setString(4, perc_CL);
+            pst.executeUpdate();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Country Language Registation");
+
+            alert.setHeaderText("Country Language Registation");
+            alert.setContentText("Record Added!");
+
+            alert.showAndWait();
+
+            table_country_language();
+
+            CountryCode_CL.setText("");
+            Language_CL.setText("");
+            Official_CL.setText("");
+            Perc_CL.setText("");
+            CountryCode_CL.requestFocus();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void table_country_language() {
+        Connect();
+        ObservableList<CountryLanguage> CL = FXCollections.observableArrayList();
+        try {
+            pst = con.prepareStatement("select CountryCode,Language,IsOfficial,Percentage from countrylanguage;");
+            ResultSet rs = pst.executeQuery();
+            {
+                while (rs.next()) {
+                    City st = new City();
+                    st.setId(rs.getString("CountryCode"));
+                    st.setName(rs.getString("Language"));
+                    st.setDistrict(rs.getString("IsOfficial"));
+                    st.setCountry_code(rs.getString("Percentage"));
+                    CL.add(st);
+                }
+            }
+
+            table_country_language.setItems(CL);
+            country_code_col.setCellValueFactory(f -> f.getValue().idProperty());
+            language_col.setCellValueFactory(f -> f.getValue().namProperty());
+            official_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+            perc_col.setCellValueFactory(f -> f.getValue().codeProperty());
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        table_country_language.setRowFactory(tv -> {
+            TableRow<City> myRow = new TableRow<>();
+            myRow.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1 && (!myRow.isEmpty())) {
+                    myIndex = table_country_language.getSelectionModel().getSelectedIndex();
+                    id_s = (String.valueOf(table_country_language.getItems().get(myIndex).getCountry_code()));
+                    CountryCode_CL.setText(table_country_language.getItems().get(myIndex).getCountry_code());
+                    Language_CL.setText(table_country_language.getItems().get(myIndex).getLanguage());
+                    Official_CL.setText(table_country_language.getItems().get(myIndex).isIs_official());
+                    Perc_CL.setText(table_country_language.getItems().get(myIndex).getPercentage());
+                }
+            });
+            return myRow;
+        });
 
     }
 
@@ -599,7 +680,25 @@ public class ManuPrincipalController implements Initializable {
 
     @FXML
     void doDelete_CL(ActionEvent event) {
+        myIndex = table_country_language.getSelectionModel().getSelectedIndex();
+        id_s = (String.valueOf(table_country_language.getItems().get(myIndex).getCountry_code()));
 
+        try {
+            pst = con.prepareStatement("delete from country where id = ? ");
+            pst.setString(1, id_s);
+            pst.executeUpdate();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Country Language Registation");
+
+            alert.setHeaderText("Country Language Registation");
+            alert.setContentText("Deleted!");
+
+            alert.showAndWait();
+            table_country_language();
+        } catch (SQLException ex) {
+            Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -720,7 +819,35 @@ public class ManuPrincipalController implements Initializable {
 
     @FXML
     void doUpdate_CL(ActionEvent event) {
+        myIndex = table_country_language.getSelectionModel().getSelectedIndex();
+        id_s = Integer.parseInt(String.valueOf(table_country_language.getItems().get(myIndex).getId()));
 
+        String code_CL, language_CL, official_CL, perc_CL;
+
+        code_CL = CountryCode_CL.getText();
+        language_CL = Language_CL.getText();
+        official_CL = Official_CL.getText();
+        perc_CL = Perc_CL.getText();
+
+        try {
+            pst = con.prepareStatement(
+                    "update CountryLanguage set Language = ? ,IsOfficial = ?, Percentage = ? where CountryCode = ? ");
+            pst.setString(4, code_CL);
+            pst.setString(1, language_CL);
+            pst.setString(2, official_CL);
+            pst.setString(3, perc_CL);
+            pst.executeUpdate();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Country Language Registation");
+
+            alert.setHeaderText("Country Language Registation");
+            alert.setContentText("Updated!");
+
+            alert.showAndWait();
+            table_country_language();
+        } catch (SQLException ex) {
+            Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
