@@ -623,7 +623,7 @@ public class ManuPrincipalController implements Initializable {
                     id_s = (String.valueOf(table_country_language.getItems().get(myIndex).getCountry_code()));
                     CountryCode_CL.setText(table_country_language.getItems().get(myIndex).getCountry_code());
                     Language_CL.setText(table_country_language.getItems().get(myIndex).getLanguage());
-                    Official_CL.setText(table_country_language.getItems().get(myIndex).getLanguage());
+                    Official_CL.setText(table_country_language.getItems().get(myIndex).isIs_official());
                     Perc_CL.setText(table_country_language.getItems().get(myIndex).getPercentage());
                 }
             });
