@@ -13,7 +13,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.sql.*;
@@ -95,10 +94,10 @@ public class ManuPrincipalController implements Initializable {
     private TextField Head_Country;
 
     @FXML
-    private TextField Indep_year;
+    private TextField ID_City;
 
     @FXML
-    private TextField ID_City;
+    private TextField Indep_year;
 
     @FXML
     private TextField Language_CL;
@@ -176,10 +175,7 @@ public class ManuPrincipalController implements Initializable {
     private TableColumn<Country, String> cont_country_col;
 
     @FXML
-    private TableColumn<CountryLanguage, String> countryL_code_col;
-
-    @FXML
-    private TableColumn<Country, String> country_code_col;
+    private TableColumn<CountryLanguage, String> country_code_col;
 
     @FXML
     private TableColumn<City, String> district_col;
@@ -608,10 +604,11 @@ public class ManuPrincipalController implements Initializable {
             }
 
             table_country_language.setItems(CL);
+            country_code_col.setCellValueFactory(f -> f.getValue().country_codeProperty());
             language_col.setCellValueFactory(f -> f.getValue().languageProperty());
             official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
             perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
-            countryL_code_col.setCellValueFactory(f -> f.getValue().cProperty());
+
         }
 
         catch (SQLException ex) {
@@ -687,7 +684,7 @@ public class ManuPrincipalController implements Initializable {
         id_s = (String.valueOf(table_country_language.getItems().get(myIndex).getCountry_code()));
 
         try {
-            pst = con.prepareStatement("delete from country where id = ? ");
+            pst = con.prepareStatement("delete from countrylanguage where CountryCode = ? ");
             pst.setString(1, id_s);
             pst.executeUpdate();
 
@@ -834,11 +831,12 @@ public class ManuPrincipalController implements Initializable {
 
         try {
             pst = con.prepareStatement(
-                    "update CountryLanguage set Language = ? ,IsOfficial = ?, Percentage = ? where CountryCode = ? ");
-            pst.setString(4, code_CL);
+                    "update countrylanguage set Language = ? ,IsOfficial = ?, Percentage = ? where CountryCode = ? ");
             pst.setString(1, language_CL);
             pst.setString(2, official_CL);
             pst.setString(3, perc_CL);
+            pst.setString(4, code_CL);
+
             pst.executeUpdate();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Country Language Registation");
@@ -858,6 +856,6 @@ public class ManuPrincipalController implements Initializable {
         Connect();
         table_city();
         table_country();
+        table_country_language();
     }
-
 }

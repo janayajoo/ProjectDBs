@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="402.0" prefWidth="1464.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLERS.ManuPrincipalController">
    <children>
-      <Pane fx:id="doMenu" layoutX="8.0" layoutY="38.0" prefHeight="413.0" prefWidth="1443.0" style="-fx-border-radius: 10; -fx-border-color: #000000; -fx-background-color: #bfb7bf;" visible="false">
+      <Pane fx:id="doMenu" layoutX="8.0" layoutY="38.0" prefHeight="413.0" prefWidth="1443.0" style="-fx-border-radius: 10; -fx-border-color: #000000; -fx-background-color: #bfb7bf;">
          <children>
             <Label fx:id="doM" alignment="CENTER" layoutX="22.0" layoutY="7.0" prefHeight="399.0" prefWidth="1392.0" text="PROYECTO BASE DE DATOS" textAlignment="CENTER">
                <font>
@@ -156,7 +156,7 @@
                   <Button fx:id="Delete_CL" layoutX="9.0" layoutY="127.0" mnemonicParsing="false" onAction="#doDelete_CL" prefHeight="38.0" prefWidth="100.0" text="Delete" />
                </children>
             </Pane>
-            <Pane fx:id="table_country_language" layoutX="138.0" layoutY="61.0" prefHeight="362.0" prefWidth="497.0" style="-fx-border-color: #17202a;">
+            <Pane layoutX="138.0" layoutY="61.0" prefHeight="362.0" prefWidth="497.0" style="-fx-border-color: #17202a;">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Country Code" textFill="WHITE">
                      <font>
@@ -184,9 +184,9 @@
                   <TextField fx:id="Perc_CL" layoutX="133.0" layoutY="310.0" prefHeight="32.0" prefWidth="267.0" />
                </children>
             </Pane>
-            <TableView layoutX="647.0" layoutY="61.0" prefHeight="362.0" prefWidth="803.0">
+            <TableView fx:id="table_country_language" layoutX="647.0" layoutY="61.0" prefHeight="362.0" prefWidth="803.0">
               <columns>
-                <TableColumn fx:id="countryL_code_col" prefWidth="129.0" text="Country Code" />
+                <TableColumn fx:id="country_code_col" prefWidth="129.0" text="Country Code" />
                 <TableColumn fx:id="language_col" minWidth="0.0" prefWidth="258.0" text="Language" />
                   <TableColumn fx:id="official_col" prefWidth="162.0" text="Is Official" />
                   <TableColumn fx:id="perc_col" prefWidth="253.0" text="Percentage" />

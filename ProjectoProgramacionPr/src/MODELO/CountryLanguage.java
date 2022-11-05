@@ -48,7 +48,7 @@ public class CountryLanguage {
         is_official.set(newis_official);
     }
 
-    public StringProperty cProperty() {
+    public StringProperty country_codeProperty() {
         return country_code;
     }
 
