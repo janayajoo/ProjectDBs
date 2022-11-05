@@ -1,7 +1,7 @@
 package MODELO;
 
-import com.mysql.cj.conf.StringProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class CountryLanguage {
     private final StringProperty country_code;
@@ -13,12 +13,13 @@ public class CountryLanguage {
         country_code = new SimpleStringProperty(this, "country_code");
         language = new SimpleStringProperty(this, "language");
         percentage = new SimpleStringProperty(this, "percentage");
-        is_official = new SimpleStringProperty(this, "is_official")
+        is_official = new SimpleStringProperty(this, "is_official");
     }
 
     public String getCountry_code() {
         return country_code.get();
     }
+
     public void setCountry_code(String newcountry_code) {
         country_code.set(newcountry_code);
     }
@@ -26,6 +27,7 @@ public class CountryLanguage {
     public String getLanguage() {
         return language.get();
     }
+
     public void setLenguage(String newlanguage) {
         language.set(newlanguage);
     }
@@ -33,6 +35,7 @@ public class CountryLanguage {
     public String getPercentage() {
         return percentage.get();
     }
+
     public void setPercentage(String newpercentage) {
         percentage.set(newpercentage);
     }
@@ -40,11 +43,12 @@ public class CountryLanguage {
     public String getIs_official() {
         return is_official.get();
     }
+
     public void setIs_official(String newis_official) {
         is_official.set(newis_official);
     }
 
-    public StringProperty country_codeProperty() {
+    public StringProperty cProperty() {
         return country_code;
     }
 
