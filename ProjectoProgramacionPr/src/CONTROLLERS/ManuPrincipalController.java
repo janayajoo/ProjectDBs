@@ -176,6 +176,9 @@ public class ManuPrincipalController implements Initializable {
     private TableColumn<Country, String> cont_country_col;
 
     @FXML
+    private TableColumn<CountryLanguage, String> countryL_code_col;
+
+    @FXML
     private TableColumn<Country, String> country_code_col;
 
     @FXML
@@ -608,7 +611,7 @@ public class ManuPrincipalController implements Initializable {
             language_col.setCellValueFactory(f -> f.getValue().languageProperty());
             official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
             perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
-            country_code_col.setCellValueFactory(f -> f.getValue().cProperty());
+            countryL_code_col.setCellValueFactory(f -> f.getValue().cProperty());
         }
 
         catch (SQLException ex) {
