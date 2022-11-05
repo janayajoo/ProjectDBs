@@ -10,8 +10,8 @@ public class City {
     private final StringProperty name;
     private final StringProperty country_code;
     private final StringProperty district;
-    private final SimpleStringProperty id;
-    private final SimpleStringProperty population;
+    private final StringProperty id;
+    private final StringProperty population;
 
     public City() {
 

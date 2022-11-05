@@ -22,6 +22,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import MODELO.City;
+import MODELO.Country;
+import MODELO.CountryLanguage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -75,16 +77,25 @@ public class ManuPrincipalController implements Initializable {
     private TextField District_City;
 
     @FXML
+    private TableColumn<Country, String> GNPO_country_col;
+
+    @FXML
     private TextField GNP_Country;
 
     @FXML
     private TextField GNP_Old_Country;
 
     @FXML
+    private TableColumn<Country, String> GNP_country_col;
+
+    @FXML
     private TextField Gov_Country;
 
     @FXML
     private TextField Head_Country;
+
+    @FXML
+    private TextField Indep_year;
 
     @FXML
     private TextField ID_City;
@@ -150,7 +161,22 @@ public class ManuPrincipalController implements Initializable {
     private Button Update_City;
 
     @FXML
+    private TableColumn<Country, String> capital_country_col;
+
+    @FXML
+    private TableColumn<Country, String> code2_country_col;
+
+    @FXML
     private TableColumn<City, String> code_col;
+
+    @FXML
+    private TableColumn<Country, String> code_country_col;
+
+    @FXML
+    private TableColumn<Country, String> cont_country_col;
+
+    @FXML
+    private TableColumn<Country, String> country_code_col;
 
     @FXML
     private TableColumn<City, String> district_col;
@@ -177,7 +203,25 @@ public class ManuPrincipalController implements Initializable {
     private Pane gestionOperaciones;
 
     @FXML
+    private TableColumn<Country, String> goverment_country_col;
+
+    @FXML
+    private TableColumn<Country, String> head_country_col;
+
+    @FXML
     private TableColumn<City, String> id_col;
+
+    @FXML
+    private TableColumn<Country, String> indep_country_col;
+
+    @FXML
+    private TableColumn<CountryLanguage, String> language_col;
+
+    @FXML
+    private TableColumn<Country, String> life_country_col;
+
+    @FXML
+    private TableColumn<Country, String> local_country_col;
 
     @FXML
     private MenuBar menuBar;
@@ -192,7 +236,25 @@ public class ManuPrincipalController implements Initializable {
     private TableColumn<City, String> name_col;
 
     @FXML
+    private TableColumn<Country, String> name_country_col;
+
+    @FXML
+    private TableColumn<CountryLanguage, String> official_col;
+
+    @FXML
+    private TableColumn<CountryLanguage, String> perc_col;
+
+    @FXML
     private TableColumn<City, String> pop_col;
+
+    @FXML
+    private TableColumn<Country, String> pop_country_col;
+
+    @FXML
+    private TableColumn<Country, String> reg_country_col;
+
+    @FXML
+    private TableColumn<Country, String> surface_country_col;
 
     @FXML
     private TableView<City> table_city;
@@ -329,6 +391,135 @@ public class ManuPrincipalController implements Initializable {
 
     @FXML
     void doCreateCountry(ActionEvent event) {
+        String code_country, name_country, continent_country, region_country, surface_country, indep_country,
+                pop_country, life_country, gnp_country, gnpold_country, local_country, goverment_country, head_country,
+                capital_country, code2_country;
+        code_country = Code_Country.getText();
+        name_country = Name_Country.getText();
+        continent_country = Continent_Country.getText();
+        region_country = Region_Country.getText();
+        surface_country = SA_Country.getText();
+        indep_country = Indep_year.getText();
+        pop_country = Pop_Country.getText();
+        life_country = Life_Country.getText();
+        gnp_country = GNP_Country.getText();
+        gnpold_country = GNP_Old_Country.getText();
+        local_country = Local_Country.getText();
+        goverment_country = Gov_Country.getText();
+        head_country = Head_Country.getText();
+        capital_country = Capital_Country.getText();
+        code2_country = Code2_Country.getText();
+
+        try {
+            pst = con.prepareStatement(
+                    "insert into country(Code,Name,Contient,Region,SurfaceArea,IndepYear,Population,LifeExpectancy,GNP,GNPOld,LocalName,GovermentForm,HeadOfState,Capital,Code2) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            pst.setString(1, code_country);
+            pst.setString(2, name_country);
+            pst.setString(3, continent_country);
+            pst.setString(4, region_country);
+            pst.setString(5, surface_country);
+            pst.setString(6, indep_country);
+            pst.setString(7, pop_country);
+            pst.setString(8, life_country);
+            pst.setString(9, gnp_country);
+            pst.setString(10, gnpold_country);
+            pst.setString(11, local_country);
+            pst.setString(12, goverment_country);
+            pst.setString(13, head_country);
+            pst.setString(14, capital_country);
+            pst.setString(15, code2_country);
+            pst.executeUpdate();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("City Registation");
+
+            alert.setHeaderText("City Registation");
+            alert.setContentText("Record Added!");
+
+            alert.showAndWait();
+
+            table_country();
+
+            Code_Country.setText("");
+            Name_Country.setText("");
+            Continent_Country.setText("");
+            Region_Country.setText("");
+            SA_Country.setText("");
+            Indep_year.setText("");
+            Pop_Country.setText("");
+            Life_Country.setText("");
+            GNP_Country.setText("");
+            GNP_Old_Country.setText("");
+            Local_Country.setText("");
+            Gov_Country.setText("");
+            Head_Country.setText("");
+            Capital_Country.setText("");
+            Code2_Country.setText("");
+            ID_City.requestFocus();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void table_country() {
+        Connect();
+        ObservableList<Country> country = FXCollections.observableArrayList();
+        try {
+            pst = con.prepareStatement(
+                    "select Code,Name,Contient,Region,SurfaceArea,IndepYear,Population,LifeExpectancy,GNP,GNPOld,LocalName,GovermentForm,HeadOfState,Capital,Code2 from country;");
+            ResultSet rs = pst.executeQuery();
+            {
+                while (rs.next()) {
+                    City st = new City();
+                    st.se(rs.getString("Code"));
+                    st.setName(rs.getString("Name"));
+                    st.setDistrict(rs.getString("Continent"));
+                    st.setCountry_code(rs.getString("Region"));
+                    st.set(rs.getString("SurfaceArea"));
+                    st.setPopulation(rs.getString("IndepYear"));
+                    st.setPopulation(rs.getString("Population"));
+                    st.setPopulation(rs.getString("LifeExpectancy"));
+                    st.setPopulation(rs.getString("GNP"));
+                    st.setPopulation(rs.getString("GNPOld"));
+                    st.setPopulation(rs.getString("LocalName"));
+                    st.setPopulation(rs.getString("GovermentForm"));
+                    st.setPopulation(rs.getString("HeadOfState"));
+                    st.setPopulation(rs.getString("Capital"));
+                    st.setPopulation(rs.getString("Code2"));
+                    country.add(st);
+                }
+            }
+
+            table_city.setItems(country);
+            id_col.setCellValueFactory(f -> f.getValue().idProperty());
+            name_col.setCellValueFactory(f -> f.getValue().namProperty());
+            district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+            code_col.setCellValueFactory(f -> f.getValue().codeProperty());
+            pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
+
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        table_country.setRowFactory(tv -> {
+            TableRow<Country> myRow = new TableRow<>();
+            myRow.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1 && (!myRow.isEmpty())) {
+                    myIndex = table_city.getSelectionModel().getSelectedIndex();
+                    id = Integer.parseInt(String.valueOf(table_country.getItems().get(myIndex).getId()));
+                    ID_City.setText(table_city.getItems().get(myIndex).getId());
+                    Name_City.setText(table_city.getItems().get(myIndex).getName());
+                    Code_City.setText(table_city.getItems().get(myIndex).getCountry_code());
+                    Pop_City.setText(table_city.getItems().get(myIndex).getPopulation());
+                    district_col.setText(table_city.getItems().get(myIndex).getDistrict());
+
+                }
+            });
+            return myRow;
+        });
 
     }
 
