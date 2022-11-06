@@ -11,107 +11,113 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="402.0" prefWidth="1464.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLERS.ManuPrincipalController">
    <children>
       <Pane fx:id="doMenu" layoutX="8.0" layoutY="38.0" prefHeight="413.0" prefWidth="1443.0" style="-fx-border-radius: 10; -fx-border-color: #000000; -fx-background-color: #bfb7bf;">
          <children>
-            <Label fx:id="doM" alignment="CENTER" layoutX="22.0" layoutY="7.0" prefHeight="399.0" prefWidth="1392.0" text="PROYECTO BASE DE DATOS" textAlignment="CENTER">
+            <Label fx:id="doM" alignment="CENTER" layoutX="22.0" layoutY="7.0" prefHeight="399.0" prefWidth="1407.0" text="PROYECTO BASE DE DATOS" textAlignment="CENTER">
                <font>
                   <Font name="SansSerif Regular" size="39.0" />
                </font>
             </Label>
+            <Text layoutX="539.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jorge Anaya, Felipe Ballesteros, Juan Jose Pinto">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Pane fx:id="gestionCountry" layoutX="-6.0" layoutY="30.0" prefHeight="431.0" prefWidth="1473.0" style="-fx-background-color: #eb984e;" visible="false">
          <children>
             <Pane layoutX="14.0" layoutY="69.0" prefHeight="354.0" prefWidth="626.0" style="-fx-border-color: #17202a;">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Code" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Code" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="52.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Name:" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="52.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Name:" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="89.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Continent" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="89.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Continent" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="126.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Region" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="126.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Region" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="163.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Surface Area" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="163.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Surface Area" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="Code_Country" layoutX="134.0" layoutY="13.0" prefHeight="32.0" prefWidth="193.0" />
-                  <TextField fx:id="Name_Country" layoutX="134.0" layoutY="51.0" prefHeight="32.0" prefWidth="478.0" />
-                  <TextField fx:id="Continent_Country" layoutX="135.0" layoutY="88.0" prefHeight="32.0" prefWidth="476.0" />
-                  <TextField fx:id="Region_Country" layoutX="135.0" layoutY="125.0" prefHeight="32.0" prefWidth="479.0" />
-                  <TextField fx:id="SA_Country" layoutX="135.0" layoutY="162.0" prefHeight="32.0" prefWidth="196.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="13.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Code 2" textFill="WHITE">
+                  <TextField fx:id="Code_Country" layoutX="134.0" layoutY="14.0" prefHeight="32.0" prefWidth="193.0" />
+                  <TextField fx:id="Name_Country" layoutX="134.0" layoutY="52.0" prefHeight="32.0" prefWidth="478.0" />
+                  <TextField fx:id="Continent_Country" layoutX="135.0" layoutY="89.0" prefHeight="32.0" prefWidth="478.0" />
+                  <TextField fx:id="Region_Country" layoutX="135.0" layoutY="126.0" prefHeight="32.0" prefWidth="478.0" />
+                  <TextField fx:id="SA_Country" layoutX="135.0" layoutY="163.0" prefHeight="32.0" prefWidth="193.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Code 2" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="Code2_Country" layoutX="454.0" layoutY="13.0" prefHeight="32.0" prefWidth="150.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="236.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Population" textFill="WHITE">
+                  <TextField fx:id="Code2_Country" layoutX="454.0" layoutY="14.0" prefHeight="32.0" prefWidth="158.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="235.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Population" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="Pop_Country" layoutX="134.0" layoutY="235.0" prefHeight="32.0" prefWidth="195.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="273.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Life Expect" textFill="WHITE">
+                  <TextField fx:id="Pop_Country" layoutX="135.0" layoutY="235.0" prefHeight="32.0" prefWidth="193.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="270.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Life Expect" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="Life_Country" layoutX="133.0" layoutY="272.0" prefHeight="32.0" prefWidth="196.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="308.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="GNP" textFill="WHITE">
+                  <TextField fx:id="Life_Country" layoutX="135.0" layoutY="270.0" prefHeight="32.0" prefWidth="193.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="306.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="GNP" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="GNP_Country" layoutX="135.0" layoutY="307.0" prefHeight="32.0" prefWidth="193.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="340.0" layoutY="306.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="GNP Old" textFill="WHITE">
+                  <TextField fx:id="GNP_Country" layoutX="135.0" layoutY="306.0" prefHeight="32.0" prefWidth="193.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="306.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="GNP Old" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="GNP_Old_Country" layoutX="465.0" layoutY="306.0" prefHeight="32.0" prefWidth="150.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="337.0" layoutY="236.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Local Name" textFill="WHITE">
+                  <TextField fx:id="GNP_Old_Country" layoutX="455.0" layoutY="306.0" prefHeight="32.0" prefWidth="158.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="235.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Local Name" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="Local_Country" layoutX="464.0" layoutY="234.0" prefHeight="32.0" prefWidth="150.0" />
+                  <TextField fx:id="Local_Country" layoutX="455.0" layoutY="235.0" prefHeight="32.0" prefWidth="158.0" />
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="199.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Goverment" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="Gov_Country" layoutX="132.0" layoutY="197.0" prefHeight="32.0" prefWidth="196.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="337.0" layoutY="270.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Capital" textFill="WHITE">
+                  <TextField fx:id="Gov_Country" layoutX="135.0" layoutY="199.0" prefHeight="32.0" prefWidth="193.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="270.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Capital" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="Capital_Country" layoutX="466.0" layoutY="270.0" prefHeight="32.0" prefWidth="150.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="197.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Head State" textFill="WHITE">
+                  <TextField fx:id="Capital_Country" layoutX="455.0" layoutY="270.0" prefHeight="32.0" prefWidth="158.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="199.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Head State" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="Head_Country" layoutX="461.0" layoutY="198.0" prefHeight="32.0" prefWidth="158.0" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="164.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Indep Year" textFill="WHITE">
+                  <TextField fx:id="Head_Country" layoutX="455.0" layoutY="199.0" prefHeight="32.0" prefWidth="158.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="163.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Indep Year" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
@@ -128,127 +134,131 @@
             </Pane>
             <TableView fx:id="table_country" layoutX="646.0" layoutY="69.0" prefHeight="354.0" prefWidth="821.0">
               <columns>
-                <TableColumn fx:id="code_country_col" prefWidth="75.0" text="Code" />
-                <TableColumn fx:id="name_country_col" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="code_country_col" prefWidth="65.0" text="Code" />
+                <TableColumn fx:id="name_country_col" prefWidth="85.0" text="Name" />
                   <TableColumn fx:id="cont_country_col" prefWidth="75.0" text="Continent" />
                   <TableColumn fx:id="reg_country_col" prefWidth="75.0" text="Region" />
                   <TableColumn fx:id="surface_country_col" prefWidth="75.0" text="Surface Area" />
-                  <TableColumn fx:id="indep_country_col" prefWidth="75.0" text="Indep Year" />
-                  <TableColumn fx:id="pop_country_col" prefWidth="75.0" text="Population" />
-                  <TableColumn fx:id="life_country_col" prefWidth="75.0" text="Life Expect" />
+                  <TableColumn fx:id="indep_country_col" prefWidth="54.0" text="Indep Year" />
+                  <TableColumn fx:id="pop_country_col" prefWidth="96.0" text="Population" />
+                  <TableColumn fx:id="life_country_col" prefWidth="55.0" text="Life Expect" />
                   <TableColumn fx:id="GNP_country_col" prefWidth="75.0" text="GNP" />
-                  <TableColumn fx:id="GNPO_country_col" prefWidth="75.0" text="GNP Old" />
-                  <TableColumn fx:id="local_country_col" prefWidth="75.0" text="Local Names" />
+                  <TableColumn fx:id="GNPO_country_col" prefWidth="63.0" text="GNP Old" />
+                  <TableColumn fx:id="local_country_col" prefWidth="107.0" text="Local Names" />
                   <TableColumn fx:id="goverment_country_col" prefWidth="75.0" text="Goverment Form" />
                   <TableColumn fx:id="head_country_col" prefWidth="75.0" text="Head of States" />
-                  <TableColumn fx:id="capital_country_col" prefWidth="75.0" text="Capital" />
-                  <TableColumn fx:id="code2_country_col" prefWidth="75.0" text="Code2" />
+                  <TableColumn fx:id="capital_country_col" prefWidth="60.0" text="Capital" />
+                  <TableColumn fx:id="code2_country_col" prefWidth="90.0" text="Code2" />
               </columns>
             </TableView>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="656.0" layoutY="30.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="WHERE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="where_Country" layoutX="782.0" layoutY="30.0" prefHeight="32.0" prefWidth="454.0" />
+            <Button fx:id="Filter_Country" layoutX="1246.0" layoutY="30.0" mnemonicParsing="false" onAction="#doFilter_Country" prefHeight="32.0" prefWidth="100.0" text="Filter" />
+            <Button fx:id="reset_Country" layoutX="1359.0" layoutY="30.0" mnemonicParsing="false" onAction="#doReset_Country" prefHeight="32.0" prefWidth="100.0" text="Reset" />
          </children>
       </Pane>
-      <Pane fx:id="gestionCL" layoutY="30.0" prefHeight="431.0" prefWidth="1464.0" style="-fx-background-color: #eb984e;">
+      <Pane fx:id="gestionCL" layoutY="30.0" prefHeight="431.0" prefWidth="1464.0" style="-fx-background-color: #eb984e;" visible="false">
          <children>
-            <Pane layoutX="8.0" layoutY="162.0" prefHeight="178.0" prefWidth="122.0" style="-fx-border-color: #17202a;">
+            <Pane layoutX="91.0" layoutY="7.0" prefHeight="52.0" prefWidth="344.0" style="-fx-border-color: #17202a;">
                <children>
-                  <Button fx:id="Create_CL" layoutX="6.0" layoutY="12.0" mnemonicParsing="false" onAction="#doCreate_CL" prefHeight="38.0" prefWidth="100.0" text="Create" />
-                  <Button fx:id="Update_CL" layoutX="9.0" layoutY="69.0" mnemonicParsing="false" onAction="#doUpdate_CL" prefHeight="38.0" prefWidth="100.0" text="Update" />
-                  <Button fx:id="Delete_CL" layoutX="9.0" layoutY="127.0" mnemonicParsing="false" onAction="#doDelete_CL" prefHeight="38.0" prefWidth="100.0" text="Delete" />
+                  <Button fx:id="Create_CL" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#doCreate_CL" prefHeight="38.0" prefWidth="100.0" text="Create" />
+                  <Button fx:id="Update_CL" layoutX="122.0" layoutY="7.0" mnemonicParsing="false" onAction="#doUpdate_CL" prefHeight="38.0" prefWidth="100.0" text="Update" />
+                  <Button fx:id="Delete_CL" layoutX="230.0" layoutY="7.0" mnemonicParsing="false" onAction="#doDelete_CL" prefHeight="38.0" prefWidth="100.0" text="Delete" />
                </children>
             </Pane>
-            <Pane layoutX="138.0" layoutY="61.0" prefHeight="362.0" prefWidth="497.0" style="-fx-border-color: #17202a;">
+            <Pane layoutX="14.0" layoutY="65.0" prefHeight="354.0" prefWidth="497.0" style="-fx-border-color: #17202a;">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Country Code" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="112.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Language" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="112.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Language" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="209.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Is Official" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="209.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Is Official" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="311.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Percentage" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="311.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Percentage" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="CountryCode_CL" layoutX="134.0" layoutY="13.0" prefHeight="32.0" prefWidth="279.0" />
-                  <TextField fx:id="Language_CL" layoutX="132.0" layoutY="111.0" prefHeight="32.0" prefWidth="273.0" />
-                  <TextField fx:id="Official_CL" layoutX="135.0" layoutY="208.0" prefHeight="32.0" prefWidth="266.0" />
-                  <TextField fx:id="Perc_CL" layoutX="133.0" layoutY="310.0" prefHeight="32.0" prefWidth="267.0" />
+                  <TextField fx:id="CountryCode_CL" layoutX="134.0" layoutY="14.0" prefHeight="32.0" prefWidth="352.0" />
+                  <TextField fx:id="Language_CL" layoutX="134.0" layoutY="112.0" prefHeight="32.0" prefWidth="352.0" />
+                  <TextField fx:id="Official_CL" layoutX="134.0" layoutY="209.0" prefHeight="32.0" prefWidth="352.0" />
+                  <TextField fx:id="Perc_CL" layoutX="134.0" layoutY="311.0" prefHeight="32.0" prefWidth="352.0" />
                </children>
             </Pane>
-            <TableView fx:id="table_country_language" layoutX="647.0" layoutY="61.0" onMouseClicked="#CL_Click" prefHeight="362.0" prefWidth="803.0">
+            <TableView fx:id="table_country_language" layoutX="521.0" layoutY="61.0" onMouseClicked="#CL_Click" prefHeight="362.0" prefWidth="929.0">
               <columns>
                 <TableColumn fx:id="country_code_col" prefWidth="129.0" text="CountryCode" />
-                <TableColumn fx:id="language_col" minWidth="0.0" prefWidth="258.0" text="Language" />
-                  <TableColumn fx:id="official_col" prefWidth="162.0" text="IsOfficial" />
-                  <TableColumn fx:id="perc_col" prefWidth="253.0" text="Percentage" />
+                <TableColumn fx:id="language_col" minWidth="0.0" prefWidth="291.0" text="Language" />
+                  <TableColumn fx:id="official_col" prefWidth="180.0" text="IsOfficial" />
+                  <TableColumn fx:id="perc_col" prefWidth="328.0" text="Percentage" />
               </columns>
             </TableView>
-            <TextField fx:id="select_CL" layoutX="773.0" layoutY="20.0" prefHeight="32.0" prefWidth="267.0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="647.0" layoutY="20.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="SELECT" textFill="WHITE">
+            <TextField fx:id="where_CL" layoutX="645.0" layoutY="21.0" prefHeight="32.0" prefWidth="559.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="521.0" layoutY="21.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="WHERE" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="where_CL" layoutX="1175.0" layoutY="20.0" prefHeight="32.0" prefWidth="267.0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1049.0" layoutY="20.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="WHERE" textFill="WHITE">
-               <font>
-                  <Font name="System Bold Italic" size="16.0" />
-               </font>
-            </Label>
+            <Button fx:id="Filter_CL" layoutX="1230.0" layoutY="21.0" mnemonicParsing="false" onAction="#doFilter_CL" prefHeight="32.0" prefWidth="100.0" text="Filter" />
+            <Button fx:id="reset_CL" layoutX="1350.0" layoutY="21.0" mnemonicParsing="false" onAction="#doReset_CL" prefHeight="32.0" prefWidth="100.0" text="Reset" />
          </children>
       </Pane>
       <Pane fx:id="gestionCity" layoutX="-7.0" layoutY="32.0" prefHeight="425.0" prefWidth="1470.0" style="-fx-background-color: #eb984e;" visible="false">
          <children>
-            <Pane layoutX="14.0" layoutY="214.0" prefHeight="178.0" prefWidth="122.0" style="-fx-border-color: #17202a;">
+            <Pane layoutX="79.0" layoutY="2.0" prefHeight="52.0" prefWidth="344.0" style="-fx-border-color: #17202a;">
                <children>
-                  <Button fx:id="Create_City" layoutX="6.0" layoutY="12.0" mnemonicParsing="false" onAction="#doCreateCity" prefHeight="38.0" prefWidth="100.0" text="Create" />
-                  <Button fx:id="Update_City" layoutX="9.0" layoutY="69.0" mnemonicParsing="false" onAction="#doUpdateCity" prefHeight="38.0" prefWidth="100.0" text="Update" />
-                  <Button fx:id="eliminarPrograma" layoutX="9.0" layoutY="127.0" mnemonicParsing="false" onAction="#doDeleteCity" prefHeight="38.0" prefWidth="100.0" text="Delete" />
+                  <Button fx:id="Create_City" layoutX="7.0" layoutY="7.0" mnemonicParsing="false" onAction="#doCreateCity" prefHeight="38.0" prefWidth="100.0" text="Create" />
+                  <Button fx:id="Update_City" layoutX="122.0" layoutY="7.0" mnemonicParsing="false" onAction="#doUpdateCity" prefHeight="38.0" prefWidth="100.0" text="Update" />
+                  <Button fx:id="eliminarPrograma" layoutX="236.0" layoutY="7.0" mnemonicParsing="false" onAction="#doDeleteCity" prefHeight="38.0" prefWidth="100.0" text="Delete" />
                </children></Pane>
-            <Pane layoutX="146.0" layoutY="60.0" prefHeight="354.0" prefWidth="497.0" style="-fx-border-color: #17202a;">
+            <Pane layoutX="14.0" layoutY="60.0" prefHeight="354.0" prefWidth="497.0" style="-fx-border-color: #17202a;">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="ID" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="91.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Name:" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="91.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Name:" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="162.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Country Code" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="162.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Country Code" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="236.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="District" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="236.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="District" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="311.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Population" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="311.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Population" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="ID_City" layoutX="134.0" layoutY="13.0" prefHeight="32.0" prefWidth="279.0" />
-                  <TextField fx:id="Name_City" layoutX="136.0" layoutY="90.0" prefHeight="32.0" prefWidth="273.0" />
-                  <TextField fx:id="Code_City" layoutX="138.0" layoutY="161.0" prefHeight="32.0" prefWidth="266.0" />
-                  <TextField fx:id="District_City" layoutX="135.0" layoutY="235.0" prefHeight="32.0" prefWidth="267.0" />
-                  <TextField fx:id="Pop_City" layoutX="131.0" layoutY="310.0" prefHeight="32.0" prefWidth="272.0" />
+                  <TextField fx:id="ID_City" layoutX="134.0" layoutY="14.0" prefHeight="32.0" prefWidth="352.0" />
+                  <TextField fx:id="Name_City" layoutX="134.0" layoutY="91.0" prefHeight="32.0" prefWidth="352.0" />
+                  <TextField fx:id="Code_City" layoutX="134.0" layoutY="162.0" prefHeight="32.0" prefWidth="352.0" />
+                  <TextField fx:id="District_City" layoutX="134.0" layoutY="236.0" prefHeight="32.0" prefWidth="352.0" />
+                  <TextField fx:id="Pop_City" layoutX="134.0" layoutY="311.0" prefHeight="32.0" prefWidth="352.0" />
                </children>
             </Pane>
-            <TableView fx:id="table_city" layoutX="660.0" layoutY="60.0" prefHeight="354.0" prefWidth="803.0">
+            <TableView fx:id="table_city" layoutX="534.0" layoutY="60.0" prefHeight="354.0" prefWidth="929.0">
               <columns>
                 <TableColumn fx:id="id_col" prefWidth="85.0" text="ID" />
                 <TableColumn fx:id="name_col" prefWidth="254.0" text="Name" />
@@ -257,33 +267,14 @@
                   <TableColumn fx:id="pop_col" prefWidth="229.0" text="Population" />
               </columns>
             </TableView>
-         </children>
-      </Pane>
-      <Pane fx:id="gestionOperaciones" layoutX="-2.0" layoutY="30.0" prefHeight="431.0" prefWidth="1470.0" style="-fx-background-color: #eb984e;" visible="false">
-         <children>
-            <Pane layoutX="6.0" layoutY="71.0" prefHeight="354.0" prefWidth="683.0" style="-fx-border-color: #17202a;">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Code" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold Italic" size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="Code_Country1" layoutX="134.0" layoutY="13.0" prefHeight="32.0" prefWidth="193.0" />
-                  <TableView layoutX="7.0" layoutY="54.0" prefHeight="293.0" prefWidth="670.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
-                  </TableView>
-               </children>
-            </Pane>
-            <Pane layoutX="97.0" layoutY="14.0" prefHeight="34.0" prefWidth="471.0" style="-fx-border-color: #17202a;">
-               <children>
-                  <Button fx:id="CreateCountry1" layoutX="12.0" layoutY="5.0" mnemonicParsing="false" onAction="#doCreateCountry" prefHeight="24.0" prefWidth="100.0" text="Create" />
-                  <Button fx:id="UpdateCountry1" layoutX="177.0" layoutY="6.0" mnemonicParsing="false" onAction="#doUpdateCountry" prefHeight="24.0" prefWidth="100.0" text="Update" />
-                  <Button fx:id="DeleteCountry1" layoutX="365.0" layoutY="3.0" mnemonicParsing="false" onAction="#doDeleteCountry" prefHeight="24.0" prefWidth="100.0" text="Delete" />
-               </children>
-            </Pane>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="534.0" layoutY="20.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="WHERE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="where_City" layoutX="659.0" layoutY="20.0" prefHeight="32.0" prefWidth="559.0" />
+            <Button fx:id="Filter_City" layoutX="1237.0" layoutY="20.0" mnemonicParsing="false" onAction="#doFilter_City" prefHeight="32.0" prefWidth="100.0" text="Filter" />
+            <Button fx:id="reset_City" layoutX="1356.0" layoutY="20.0" mnemonicParsing="false" onAction="#doReset_City" prefHeight="32.0" prefWidth="100.0" text="Reset" />
          </children>
       </Pane>
       <MenuBar fx:id="menuBar" layoutY="3.0" prefHeight="25.0" prefWidth="1464.0" style="-fx-border-color: #000000;">
@@ -294,7 +285,6 @@
               <MenuItem fx:id="MoveCity" mnemonicParsing="false" onAction="#doCity" text="City CRUD" />
                   <MenuItem fx:id="MoveCountry" mnemonicParsing="false" onAction="#doCountry" text="Country CRUD" />
                   <MenuItem fx:id="MoveCL" mnemonicParsing="false" onAction="#doCL" text="Country Language CRUD" />
-                  <MenuItem fx:id="MoveOperaciones" mnemonicParsing="false" onAction="#doOperations" text="Operaciones" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="SALIDA">

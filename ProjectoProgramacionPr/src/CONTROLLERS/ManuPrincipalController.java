@@ -4,8 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -163,6 +161,24 @@ public class ManuPrincipalController implements Initializable {
     private Button Update_City;
 
     @FXML
+    private Button Filter_CL;
+
+    @FXML
+    private Button Filter_City;
+
+    @FXML
+    private Button Filter_Country;
+
+    @FXML
+    private Button reset_Country;
+
+    @FXML
+    private Button reset_CL;
+
+    @FXML
+    private Button reset_City;
+
+    @FXML
     private TableColumn<Country, String> capital_country_col;
 
     @FXML
@@ -200,9 +216,6 @@ public class ManuPrincipalController implements Initializable {
 
     @FXML
     private Pane gestionCountry;
-
-    @FXML
-    private Pane gestionOperaciones;
 
     @FXML
     private TableColumn<Country, String> goverment_country_col;
@@ -266,6 +279,15 @@ public class ManuPrincipalController implements Initializable {
 
     @FXML
     private TableView<CountryLanguage> table_country_language;
+
+    @FXML
+    private TextField where_CL;
+
+    @FXML
+    private TextField where_City;
+
+    @FXML
+    private TextField where_Country;
 
     Connection con;
     PreparedStatement pst;
@@ -717,16 +739,6 @@ public class ManuPrincipalController implements Initializable {
         this.gestionCL.setVisible(false);
         this.gestionCity.setVisible(false);
         this.gestionCountry.setVisible(false);
-        this.gestionOperaciones.setVisible(false);
-    }
-
-    @FXML
-    void doOperations(ActionEvent event) {
-        this.gestionCL.setVisible(false);
-        this.gestionCity.setVisible(false);
-        this.gestionCountry.setVisible(false);
-        this.gestionOperaciones.setVisible(true);
-        this.gestionOperaciones.toFront();
     }
 
     @FXML
@@ -876,6 +888,156 @@ public class ManuPrincipalController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    void doFilter_CL(ActionEvent event) {
+
+        String where;
+        where = where_CL.getText();
+
+        Connect();
+        ObservableList<CountryLanguage> CL = FXCollections.observableArrayList();
+
+        try {
+            pst = con.prepareStatement(
+                    "select CountryCode,Language,IsOfficial,Percentage from countrylanguage where " + where + ";");
+            ResultSet rs = pst.executeQuery();
+            {
+                while (rs.next()) {
+                    CountryLanguage st = new CountryLanguage();
+                    st.setCountry_code(rs.getString("CountryCode"));
+                    st.setLenguage(rs.getString("Language"));
+                    st.setIs_official(rs.getString("IsOfficial"));
+                    st.setPercentage(rs.getString("Percentage"));
+                    CL.add(st);
+                }
+            }
+
+            table_country_language.setItems(CL);
+            country_code_col.setCellValueFactory(f -> f.getValue().country_codeProperty());
+            language_col.setCellValueFactory(f -> f.getValue().languageProperty());
+            official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
+            perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
+
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    void doFilter_Country(ActionEvent event) {
+
+        String where;
+        where = where_Country.getText();
+
+        Connect();
+        ObservableList<Country> country = FXCollections.observableArrayList();
+
+        try {
+            pst = con.prepareStatement(
+                    "select * from country where " + where + ";");
+            ResultSet rs = pst.executeQuery();
+            {
+                while (rs.next()) {
+                    Country st = new Country();
+                    st.setCode(rs.getString("Code"));
+                    st.setName(rs.getString("Name"));
+                    st.setContinent(rs.getString("Continent"));
+                    st.setRegion(rs.getString("Region"));
+                    st.setSurface_area(rs.getString("SurfaceArea"));
+                    st.setIndep_year(rs.getString("IndepYear"));
+                    st.setPopulation(rs.getString("Population"));
+                    st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                    st.setGnp(rs.getString("GNP"));
+                    st.setGnp_old(rs.getString("GNPOld"));
+                    st.setLocal_name(rs.getString("LocalName"));
+                    st.setGovernment_form(rs.getString("GovernmentForm"));
+                    st.setHead_state(rs.getString("HeadOfState"));
+                    st.setCapital(rs.getString("Capital"));
+                    st.setCode2(rs.getString("Code2"));
+                    country.add(st);
+                }
+            }
+
+            table_country.setItems(country);
+            code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+            name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+            cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+            reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+            surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+            indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+            pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+            life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+            GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+            GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+            local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+            goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+            head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+            capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+            code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    void doFilter_City(ActionEvent event) {
+
+        String where;
+        where = where_City.getText();
+
+        Connect();
+        ObservableList<City> city = FXCollections.observableArrayList();
+
+        try {
+            pst = con.prepareStatement(
+                    "select * from city where " + where + ";");
+            ResultSet rs = pst.executeQuery();
+            {
+                while (rs.next()) {
+                    City st = new City();
+                    st.setId(rs.getString("ID"));
+                    st.setName(rs.getString("Name"));
+                    st.setDistrict(rs.getString("District"));
+                    st.setCountry_code(rs.getString("CountryCode"));
+                    st.setPopulation(rs.getString("Population"));
+                    city.add(st);
+                }
+            }
+
+            table_city.setItems(city);
+            id_col.setCellValueFactory(f -> f.getValue().idProperty());
+            name_col.setCellValueFactory(f -> f.getValue().namProperty());
+            district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+            code_col.setCellValueFactory(f -> f.getValue().codeProperty());
+            pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
+
+        }
+
+        catch (SQLException ex) {
+            Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    void doReset_Country(ActionEvent event) {
+        table_country();
+    }
+
+    @FXML
+    void doReset_City(ActionEvent event) {
+        table_city();
+    }
+
+    @FXML
+    void doReset_CL(ActionEvent event) {
+        table_country_language();
     }
 
     @Override
