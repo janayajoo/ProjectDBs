@@ -184,14 +184,26 @@
                   <TextField fx:id="Perc_CL" layoutX="133.0" layoutY="310.0" prefHeight="32.0" prefWidth="267.0" />
                </children>
             </Pane>
-            <TableView fx:id="table_country_language" layoutX="647.0" layoutY="61.0" prefHeight="362.0" prefWidth="803.0">
+            <TableView fx:id="table_country_language" layoutX="647.0" layoutY="61.0" onMouseClicked="#CL_Click" prefHeight="362.0" prefWidth="803.0">
               <columns>
-                <TableColumn fx:id="country_code_col" prefWidth="129.0" text="Country Code" />
+                <TableColumn fx:id="country_code_col" prefWidth="129.0" text="CountryCode" />
                 <TableColumn fx:id="language_col" minWidth="0.0" prefWidth="258.0" text="Language" />
-                  <TableColumn fx:id="official_col" prefWidth="162.0" text="Is Official" />
+                  <TableColumn fx:id="official_col" prefWidth="162.0" text="IsOfficial" />
                   <TableColumn fx:id="perc_col" prefWidth="253.0" text="Percentage" />
               </columns>
             </TableView>
+            <TextField fx:id="select_CL" layoutX="773.0" layoutY="20.0" prefHeight="32.0" prefWidth="267.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="647.0" layoutY="20.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="SELECT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="where_CL" layoutX="1175.0" layoutY="20.0" prefHeight="32.0" prefWidth="267.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1049.0" layoutY="20.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="WHERE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Pane fx:id="gestionCity" layoutX="-7.0" layoutY="32.0" prefHeight="425.0" prefWidth="1470.0" style="-fx-background-color: #eb984e;" visible="false">

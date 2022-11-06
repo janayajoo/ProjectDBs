@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -11,6 +13,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -268,7 +271,8 @@ public class ManuPrincipalController implements Initializable {
     PreparedStatement pst;
     int myIndex;
     int id;
-    String id_s;
+    String id_s, id_lang;
+    String code_CLnew, language_CLnew, official_CLnew, perc_CLnew;
 
     public void Connect() {
         try {
@@ -589,6 +593,7 @@ public class ManuPrincipalController implements Initializable {
     public void table_country_language() {
         Connect();
         ObservableList<CountryLanguage> CL = FXCollections.observableArrayList();
+
         try {
             pst = con.prepareStatement("select CountryCode,Language,IsOfficial,Percentage from countrylanguage;");
             ResultSet rs = pst.executeQuery();
@@ -625,6 +630,10 @@ public class ManuPrincipalController implements Initializable {
                     Language_CL.setText(table_country_language.getItems().get(myIndex).getLanguage());
                     Official_CL.setText(table_country_language.getItems().get(myIndex).getIs_official());
                     Perc_CL.setText(table_country_language.getItems().get(myIndex).getPercentage());
+
+                    code_CLnew = table_country_language.getItems().get(myIndex).getCountry_code();
+
+                    language_CLnew = (table_country_language.getItems().get(myIndex).getLanguage());
                 }
             });
             return myRow;
@@ -682,10 +691,12 @@ public class ManuPrincipalController implements Initializable {
     void doDelete_CL(ActionEvent event) {
         myIndex = table_country_language.getSelectionModel().getSelectedIndex();
         id_s = (String.valueOf(table_country_language.getItems().get(myIndex).getCountry_code()));
+        id_lang = (String.valueOf(table_country_language.getItems().get(myIndex).getLanguage()));
 
         try {
-            pst = con.prepareStatement("delete from countrylanguage where CountryCode = ? ");
+            pst = con.prepareStatement("delete from countrylanguage where CountryCode = ? and Language= ?");
             pst.setString(1, id_s);
+            pst.setString(2, id_lang);
             pst.executeUpdate();
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -818,8 +829,22 @@ public class ManuPrincipalController implements Initializable {
     }
 
     @FXML
+    void CL_Click(MouseEvent event) {
+        myIndex = table_country_language.getSelectionModel().getSelectedIndex();
+
+        id_s = (String.valueOf(table_country_language.getItems().get(myIndex).getCountry_code()));
+
+        code_CLnew = CountryCode_CL.getText();
+        language_CLnew = Language_CL.getText();
+        official_CLnew = Official_CL.getText();
+        perc_CLnew = Perc_CL.getText();
+        System.out.println(code_CLnew);
+    }
+
+    @FXML
     void doUpdate_CL(ActionEvent event) {
         myIndex = table_country_language.getSelectionModel().getSelectedIndex();
+
         id_s = (String.valueOf(table_country_language.getItems().get(myIndex).getCountry_code()));
 
         String code_CL, language_CL, official_CL, perc_CL;
@@ -831,11 +856,13 @@ public class ManuPrincipalController implements Initializable {
 
         try {
             pst = con.prepareStatement(
-                    "update countrylanguage set Language = ? ,IsOfficial = ?, Percentage = ? where CountryCode = ? ");
-            pst.setString(1, language_CL);
-            pst.setString(2, official_CL);
-            pst.setString(3, perc_CL);
-            pst.setString(4, code_CL);
+                    "update countrylanguage set CountryCode = ?, Language = ? ,IsOfficial = ?, Percentage = ? where CountryCode = ? and Language = ?");
+            pst.setString(1, code_CL);
+            pst.setString(2, language_CL);
+            pst.setString(3, official_CL);
+            pst.setString(4, perc_CL);
+            pst.setString(5, code_CLnew);
+            pst.setString(6, language_CLnew);
 
             pst.executeUpdate();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
