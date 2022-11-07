@@ -901,7 +901,11 @@ public class ManuPrincipalController implements Initializable {
 
         try {
             pst = con.prepareStatement(
-                    "select CountryCode,Language,IsOfficial,Percentage from countrylanguage where " + where + ";");
+                    "select * from countrylanguage where CountryCode like ? or Language like ? or isOfficial like ? or Percentage like ?;");
+            pst.setString(1, where);
+            pst.setString(2, where);
+            pst.setString(3, where);
+            pst.setString(4, where);
             ResultSet rs = pst.executeQuery();
             {
                 while (rs.next()) {
@@ -938,7 +942,22 @@ public class ManuPrincipalController implements Initializable {
 
         try {
             pst = con.prepareStatement(
-                    "select * from country where " + where + ";");
+                    "select * from country where Code like ? or Name like ? or Continent like ? or Region like ? or SurfaceArea like ? or IndepYear like ? or Population like ? or LifeExpectancy like ? or GNP like ? or GNPOld like ? or LocalName like ? or GovernmentForm like ? or HeadOfState like ? or Capital like ? or Code2 like ?;");
+            pst.setString(1, where);
+            pst.setString(2, where);
+            pst.setString(3, where);
+            pst.setString(4, where);
+            pst.setString(5, where);
+            pst.setString(6, where);
+            pst.setString(7, where);
+            pst.setString(8, where);
+            pst.setString(9, where);
+            pst.setString(10, where);
+            pst.setString(11, where);
+            pst.setString(12, where);
+            pst.setString(13, where);
+            pst.setString(14, where);
+            pst.setString(15, where);
             ResultSet rs = pst.executeQuery();
             {
                 while (rs.next()) {
@@ -997,7 +1016,14 @@ public class ManuPrincipalController implements Initializable {
 
         try {
             pst = con.prepareStatement(
-                    "select * from city where " + where + ";");
+                    // "select * from city where " + where + ";");
+                    "select * from city where ID like ? or Name like ? or District like ? or CountryCode like ? or Population like ?");
+            pst.setString(1, where);
+            pst.setString(2, where);
+            pst.setString(3, where);
+            pst.setString(4, where);
+            pst.setString(5, where);
+
             ResultSet rs = pst.executeQuery();
             {
                 while (rs.next()) {
