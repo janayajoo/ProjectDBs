@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -156,9 +158,12 @@
                   <Font name="System Bold Italic" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="where_Country" layoutX="782.0" layoutY="30.0" onKeyPressed="#City_key" prefHeight="32.0" prefWidth="454.0" />
+            <TextField fx:id="where_Country" layoutX="943.0" layoutY="30.0" prefHeight="32.0" prefWidth="293.0" />
             <Button fx:id="Filter_Country" layoutX="1246.0" layoutY="30.0" mnemonicParsing="false" onAction="#doFilter_Country" prefHeight="32.0" prefWidth="100.0" text="Filter" />
             <Button fx:id="reset_Country" layoutX="1359.0" layoutY="30.0" mnemonicParsing="false" onAction="#doReset_Country" prefHeight="32.0" prefWidth="100.0" text="Reset" />
+            <RadioButton fx:id="sql_country_button" layoutX="1253.0" layoutY="6.0" mnemonicParsing="false" selected="true" text="SQL" />
+            <RadioButton fx:id="regexp_country_button" layoutX="1366.0" layoutY="6.0" mnemonicParsing="false" text="REGEXP" />
+            <ChoiceBox fx:id="combo_country" layoutX="785.0" layoutY="30.0" prefHeight="32.0" prefWidth="150.0" />
          </children>
       </Pane>
       <Pane fx:id="gestionCL" layoutY="30.0" prefHeight="431.0" prefWidth="1464.0" style="-fx-background-color: #eb984e;" visible="false">
@@ -206,7 +211,7 @@
                   <TableColumn fx:id="perc_col" prefWidth="328.0" text="Percentage" />
               </columns>
             </TableView>
-            <TextField fx:id="where_CL" layoutX="645.0" layoutY="21.0" prefHeight="32.0" prefWidth="559.0" />
+            <TextField fx:id="where_CL" layoutX="824.0" layoutY="21.0" prefHeight="32.0" prefWidth="380.0" />
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="521.0" layoutY="21.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="WHERE" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="16.0" />
@@ -214,17 +219,20 @@
             </Label>
             <Button fx:id="Filter_CL" layoutX="1230.0" layoutY="21.0" mnemonicParsing="false" onAction="#doFilter_CL" prefHeight="32.0" prefWidth="100.0" text="Filter" />
             <Button fx:id="reset_CL" layoutX="1350.0" layoutY="21.0" mnemonicParsing="false" onAction="#doReset_CL" prefHeight="32.0" prefWidth="100.0" text="Reset" />
+            <RadioButton fx:id="sql_CL_button" layoutX="1259.0" layoutY="1.0" mnemonicParsing="false" selected="true" text="SQL" />
+            <RadioButton fx:id="regexp_CL_button" layoutX="1372.0" layoutY="1.0" mnemonicParsing="false" text="REGEXP" />
+            <ChoiceBox fx:id="combo_CL" layoutX="657.0" layoutY="21.0" prefHeight="32.0" prefWidth="150.0" />
          </children>
       </Pane>
       <Pane fx:id="gestionCity" layoutX="-7.0" layoutY="32.0" prefHeight="425.0" prefWidth="1470.0" style="-fx-background-color: #eb984e;" visible="false">
          <children>
-            <Pane layoutX="79.0" layoutY="2.0" prefHeight="52.0" prefWidth="344.0" style="-fx-border-color: #17202a;">
+            <Pane layoutX="81.0" layoutY="14.0" prefHeight="52.0" prefWidth="344.0" style="-fx-border-color: #17202a;">
                <children>
                   <Button fx:id="Create_City" layoutX="7.0" layoutY="7.0" mnemonicParsing="false" onAction="#doCreateCity" prefHeight="38.0" prefWidth="100.0" text="Create" />
                   <Button fx:id="Update_City" layoutX="122.0" layoutY="7.0" mnemonicParsing="false" onAction="#doUpdateCity" prefHeight="38.0" prefWidth="100.0" text="Update" />
                   <Button fx:id="eliminarPrograma" layoutX="236.0" layoutY="7.0" mnemonicParsing="false" onAction="#doDeleteCity" prefHeight="38.0" prefWidth="100.0" text="Delete" />
                </children></Pane>
-            <Pane layoutX="14.0" layoutY="60.0" prefHeight="354.0" prefWidth="497.0" style="-fx-border-color: #17202a;">
+            <Pane layoutX="14.0" layoutY="71.0" prefHeight="343.0" prefWidth="497.0" style="-fx-border-color: #17202a;">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="ID" textFill="WHITE">
                      <font>
@@ -246,7 +254,7 @@
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="311.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Population" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="302.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="Population" textFill="WHITE">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
@@ -255,10 +263,10 @@
                   <TextField fx:id="Name_City" layoutX="134.0" layoutY="91.0" prefHeight="32.0" prefWidth="352.0" />
                   <TextField fx:id="Code_City" layoutX="134.0" layoutY="162.0" prefHeight="32.0" prefWidth="352.0" />
                   <TextField fx:id="District_City" layoutX="134.0" layoutY="236.0" prefHeight="32.0" prefWidth="352.0" />
-                  <TextField fx:id="Pop_City" layoutX="134.0" layoutY="311.0" prefHeight="32.0" prefWidth="352.0" />
+                  <TextField fx:id="Pop_City" layoutX="134.0" layoutY="302.0" prefHeight="32.0" prefWidth="352.0" />
                </children>
             </Pane>
-            <TableView fx:id="table_city" layoutX="534.0" layoutY="60.0" prefHeight="354.0" prefWidth="929.0">
+            <TableView fx:id="table_city" layoutX="534.0" layoutY="71.0" prefHeight="343.0" prefWidth="929.0">
               <columns>
                 <TableColumn fx:id="id_col" prefWidth="85.0" text="ID" />
                 <TableColumn fx:id="name_col" prefWidth="254.0" text="Name" />
@@ -267,14 +275,17 @@
                   <TableColumn fx:id="pop_col" prefWidth="229.0" text="Population" />
               </columns>
             </TableView>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="534.0" layoutY="20.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="WHERE" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="534.0" layoutY="28.0" prefHeight="32.0" prefWidth="114.0" style="-fx-border-color: #17202a;" text="WHERE" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="where_City" layoutX="659.0" layoutY="20.0" prefHeight="32.0" prefWidth="559.0" />
-            <Button fx:id="Filter_City" layoutX="1237.0" layoutY="20.0" mnemonicParsing="false" onAction="#doFilter_City" prefHeight="32.0" prefWidth="100.0" text="Filter" />
-            <Button fx:id="reset_City" layoutX="1356.0" layoutY="20.0" mnemonicParsing="false" onAction="#doReset_City" prefHeight="32.0" prefWidth="100.0" text="Reset" />
+            <TextField fx:id="where_City" layoutX="823.0" layoutY="28.0" prefHeight="32.0" prefWidth="395.0" />
+            <Button fx:id="Filter_City" layoutX="1237.0" layoutY="28.0" mnemonicParsing="false" onAction="#doFilter_City" prefHeight="32.0" prefWidth="100.0" text="Filter" />
+            <Button fx:id="reset_City" layoutX="1356.0" layoutY="28.0" mnemonicParsing="false" onAction="#doReset_City" prefHeight="32.0" prefWidth="100.0" text="Reset" />
+            <RadioButton fx:id="sql_city_button" layoutX="1261.0" layoutY="6.0" mnemonicParsing="false" selected="true" text="SQL" />
+            <RadioButton fx:id="regexp_city_button" layoutX="1370.0" layoutY="6.0" mnemonicParsing="false" text="REGEXP" />
+            <ChoiceBox fx:id="combo_city" layoutX="660.0" layoutY="28.0" prefHeight="32.0" prefWidth="150.0" />
          </children>
       </Pane>
       <MenuBar fx:id="menuBar" layoutY="3.0" prefHeight="25.0" prefWidth="1464.0" style="-fx-border-color: #000000;">

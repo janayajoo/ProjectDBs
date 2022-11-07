@@ -4,13 +4,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -288,6 +292,33 @@ public class ManuPrincipalController implements Initializable {
 
     @FXML
     private TextField where_Country;
+
+    @FXML
+    private RadioButton regexp_country_button;
+
+    @FXML
+    private RadioButton sql_country_button;
+
+    @FXML
+    private RadioButton regexp_city_button;
+
+    @FXML
+    private RadioButton sql_city_button;
+
+    @FXML
+    private RadioButton regexp_CL_button;
+
+    @FXML
+    private RadioButton sql_CL_button;
+
+    @FXML
+    private ChoiceBox<String> combo_city;
+
+    @FXML
+    private ChoiceBox<String> combo_CL;
+
+    @FXML
+    private ChoiceBox<String> combo_country;
 
     Connection con;
     PreparedStatement pst;
@@ -853,6 +884,8 @@ public class ManuPrincipalController implements Initializable {
         System.out.println(code_CLnew);
     }
 
+    // -----------------------------------UPDATECL-----------------------------------//
+
     @FXML
     void doUpdate_CL(ActionEvent event) {
         myIndex = table_country_language.getSelectionModel().getSelectedIndex();
@@ -890,8 +923,12 @@ public class ManuPrincipalController implements Initializable {
         }
     }
 
+    // -----------------------------------FIILTROCOUNTRYLANGUAGE-----------------------------------//
+
     @FXML
     void doFilter_CL(ActionEvent event) {
+
+        int opcion = (combo_CL.getSelectionModel().getSelectedIndex());
 
         String where;
         where = where_CL.getText();
@@ -899,40 +936,331 @@ public class ManuPrincipalController implements Initializable {
         Connect();
         ObservableList<CountryLanguage> CL = FXCollections.observableArrayList();
 
-        try {
-            pst = con.prepareStatement(
-                    "select * from countrylanguage where CountryCode like ? or Language like ? or isOfficial like ? or Percentage like ?;");
-            pst.setString(1, where);
-            pst.setString(2, where);
-            pst.setString(3, where);
-            pst.setString(4, where);
-            ResultSet rs = pst.executeQuery();
-            {
-                while (rs.next()) {
-                    CountryLanguage st = new CountryLanguage();
-                    st.setCountry_code(rs.getString("CountryCode"));
-                    st.setLenguage(rs.getString("Language"));
-                    st.setIs_official(rs.getString("IsOfficial"));
-                    st.setPercentage(rs.getString("Percentage"));
-                    CL.add(st);
+        if (opcion == (0)) {
+            if (sql_CL_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from countrylanguage where CountryCode like ? or Language like ? or isOfficial like ? or Percentage like ?;");
+                    pst.setString(1, where);
+                    pst.setString(2, where);
+                    pst.setString(3, where);
+                    pst.setString(4, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            CountryLanguage st = new CountryLanguage();
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setLenguage(rs.getString("Language"));
+                            st.setIs_official(rs.getString("IsOfficial"));
+                            st.setPercentage(rs.getString("Percentage"));
+                            CL.add(st);
+                        }
+                    }
+
+                    table_country_language.setItems(CL);
+                    country_code_col.setCellValueFactory(f -> f.getValue().country_codeProperty());
+                    language_col.setCellValueFactory(f -> f.getValue().languageProperty());
+                    official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
+                    perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
-            table_country_language.setItems(CL);
-            country_code_col.setCellValueFactory(f -> f.getValue().country_codeProperty());
-            language_col.setCellValueFactory(f -> f.getValue().languageProperty());
-            official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
-            perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
+            if (regexp_CL_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from countrylanguage where CountryCode REGEXP ? or Language REGEXP ? or isOfficial REGEXP ? or Percentage REGEXP ?;");
+                    pst.setString(1, where);
+                    pst.setString(2, where);
+                    pst.setString(3, where);
+                    pst.setString(4, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            CountryLanguage st = new CountryLanguage();
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setLenguage(rs.getString("Language"));
+                            st.setIs_official(rs.getString("IsOfficial"));
+                            st.setPercentage(rs.getString("Percentage"));
+                            CL.add(st);
+                        }
+                    }
 
+                    table_country_language.setItems(CL);
+                    country_code_col.setCellValueFactory(f -> f.getValue().country_codeProperty());
+                    language_col.setCellValueFactory(f -> f.getValue().languageProperty());
+                    official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
+                    perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
 
-        catch (SQLException ex) {
-            Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        if (opcion == (1)) {
+            if (sql_CL_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from countrylanguage where CountryCode like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            CountryLanguage st = new CountryLanguage();
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setLenguage(rs.getString("Language"));
+                            st.setIs_official(rs.getString("IsOfficial"));
+                            st.setPercentage(rs.getString("Percentage"));
+                            CL.add(st);
+                        }
+                    }
+
+                    table_country_language.setItems(CL);
+                    country_code_col.setCellValueFactory(f -> f.getValue().country_codeProperty());
+                    language_col.setCellValueFactory(f -> f.getValue().languageProperty());
+                    official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
+                    perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            if (regexp_CL_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from countrylanguage where CountryCode REGEXP ?;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            CountryLanguage st = new CountryLanguage();
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setLenguage(rs.getString("Language"));
+                            st.setIs_official(rs.getString("IsOfficial"));
+                            st.setPercentage(rs.getString("Percentage"));
+                            CL.add(st);
+                        }
+                    }
+
+                    table_country_language.setItems(CL);
+                    country_code_col.setCellValueFactory(f -> f.getValue().country_codeProperty());
+                    language_col.setCellValueFactory(f -> f.getValue().languageProperty());
+                    official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
+                    perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
+
+        if (opcion == (2)) {
+            if (sql_CL_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from countrylanguage where Language like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            CountryLanguage st = new CountryLanguage();
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setLenguage(rs.getString("Language"));
+                            st.setIs_official(rs.getString("IsOfficial"));
+                            st.setPercentage(rs.getString("Percentage"));
+                            CL.add(st);
+                        }
+                    }
+
+                    table_country_language.setItems(CL);
+                    country_code_col.setCellValueFactory(f -> f.getValue().country_codeProperty());
+                    language_col.setCellValueFactory(f -> f.getValue().languageProperty());
+                    official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
+                    perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            if (regexp_CL_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from countrylanguage where Language REGEXP ?;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            CountryLanguage st = new CountryLanguage();
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setLenguage(rs.getString("Language"));
+                            st.setIs_official(rs.getString("IsOfficial"));
+                            st.setPercentage(rs.getString("Percentage"));
+                            CL.add(st);
+                        }
+                    }
+
+                    table_country_language.setItems(CL);
+                    country_code_col.setCellValueFactory(f -> f.getValue().country_codeProperty());
+                    language_col.setCellValueFactory(f -> f.getValue().languageProperty());
+                    official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
+                    perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == (3)) {
+            if (sql_CL_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from countrylanguage where IsOfficial like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            CountryLanguage st = new CountryLanguage();
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setLenguage(rs.getString("Language"));
+                            st.setIs_official(rs.getString("IsOfficial"));
+                            st.setPercentage(rs.getString("Percentage"));
+                            CL.add(st);
+                        }
+                    }
+
+                    table_country_language.setItems(CL);
+                    country_code_col.setCellValueFactory(f -> f.getValue().country_codeProperty());
+                    language_col.setCellValueFactory(f -> f.getValue().languageProperty());
+                    official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
+                    perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            if (regexp_CL_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from countrylanguage where IsOfficial REGEXP ?;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            CountryLanguage st = new CountryLanguage();
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setLenguage(rs.getString("Language"));
+                            st.setIs_official(rs.getString("IsOfficial"));
+                            st.setPercentage(rs.getString("Percentage"));
+                            CL.add(st);
+                        }
+                    }
+
+                    table_country_language.setItems(CL);
+                    country_code_col.setCellValueFactory(f -> f.getValue().country_codeProperty());
+                    language_col.setCellValueFactory(f -> f.getValue().languageProperty());
+                    official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
+                    perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == (4)) {
+            if (sql_CL_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from countrylanguage where Percentage like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            CountryLanguage st = new CountryLanguage();
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setLenguage(rs.getString("Language"));
+                            st.setIs_official(rs.getString("IsOfficial"));
+                            st.setPercentage(rs.getString("Percentage"));
+                            CL.add(st);
+                        }
+                    }
+
+                    table_country_language.setItems(CL);
+                    country_code_col.setCellValueFactory(f -> f.getValue().country_codeProperty());
+                    language_col.setCellValueFactory(f -> f.getValue().languageProperty());
+                    official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
+                    perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            if (regexp_CL_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from countrylanguage where Percentage REGEXP ?;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            CountryLanguage st = new CountryLanguage();
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setLenguage(rs.getString("Language"));
+                            st.setIs_official(rs.getString("IsOfficial"));
+                            st.setPercentage(rs.getString("Percentage"));
+                            CL.add(st);
+                        }
+                    }
+
+                    table_country_language.setItems(CL);
+                    country_code_col.setCellValueFactory(f -> f.getValue().country_codeProperty());
+                    language_col.setCellValueFactory(f -> f.getValue().languageProperty());
+                    official_col.setCellValueFactory(f -> f.getValue().is_officialProperty());
+                    perc_col.setCellValueFactory(f -> f.getValue().percentageProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
     }
+
+    // -----------------------------------FIILTRO
+    // COUNTRY-----------------------------------//
 
     @FXML
     void doFilter_Country(ActionEvent event) {
+
+        int opcion = (combo_country.getSelectionModel().getSelectedIndex());
 
         String where;
         where = where_Country.getText();
@@ -940,73 +1268,1723 @@ public class ManuPrincipalController implements Initializable {
         Connect();
         ObservableList<Country> country = FXCollections.observableArrayList();
 
-        try {
-            pst = con.prepareStatement(
-                    "select * from country where Code like ? or Name like ? or Continent like ? or Region like ? or SurfaceArea like ? or IndepYear like ? or Population like ? or LifeExpectancy like ? or GNP like ? or GNPOld like ? or LocalName like ? or GovernmentForm like ? or HeadOfState like ? or Capital like ? or Code2 like ?;");
-            pst.setString(1, where);
-            pst.setString(2, where);
-            pst.setString(3, where);
-            pst.setString(4, where);
-            pst.setString(5, where);
-            pst.setString(6, where);
-            pst.setString(7, where);
-            pst.setString(8, where);
-            pst.setString(9, where);
-            pst.setString(10, where);
-            pst.setString(11, where);
-            pst.setString(12, where);
-            pst.setString(13, where);
-            pst.setString(14, where);
-            pst.setString(15, where);
-            ResultSet rs = pst.executeQuery();
-            {
-                while (rs.next()) {
-                    Country st = new Country();
-                    st.setCode(rs.getString("Code"));
-                    st.setName(rs.getString("Name"));
-                    st.setContinent(rs.getString("Continent"));
-                    st.setRegion(rs.getString("Region"));
-                    st.setSurface_area(rs.getString("SurfaceArea"));
-                    st.setIndep_year(rs.getString("IndepYear"));
-                    st.setPopulation(rs.getString("Population"));
-                    st.setLife_expectancy(rs.getString("LifeExpectancy"));
-                    st.setGnp(rs.getString("GNP"));
-                    st.setGnp_old(rs.getString("GNPOld"));
-                    st.setLocal_name(rs.getString("LocalName"));
-                    st.setGovernment_form(rs.getString("GovernmentForm"));
-                    st.setHead_state(rs.getString("HeadOfState"));
-                    st.setCapital(rs.getString("Capital"));
-                    st.setCode2(rs.getString("Code2"));
-                    country.add(st);
+        if (opcion == 0) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Code like ? or Name like ? or Continent like ? or Region like ? or SurfaceArea like ? or IndepYear like ? or Population like ? or LifeExpectancy like ? or GNP like ? or GNPOld like ? or LocalName like ? or GovernmentForm like ? or HeadOfState like ? or Capital like ? or Code2 like ?;");
+                    pst.setString(1, where);
+                    pst.setString(2, where);
+                    pst.setString(3, where);
+                    pst.setString(4, where);
+                    pst.setString(5, where);
+                    pst.setString(6, where);
+                    pst.setString(7, where);
+                    pst.setString(8, where);
+                    pst.setString(9, where);
+                    pst.setString(10, where);
+                    pst.setString(11, where);
+                    pst.setString(12, where);
+                    pst.setString(13, where);
+                    pst.setString(14, where);
+                    pst.setString(15, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Code REGEXP ? or Name REGEXP ? or Continent REGEXP ? or Region REGEXP ? or SurfaceArea REGEXP ? or IndepYear REGEXP ? or Population REGEXP ? or LifeExpectancy REGEXP ? or GNP REGEXP ? or GNPOld REGEXP ? or LocalName REGEXP ? or GovernmentForm REGEXP ? or HeadOfState REGEXP ? or Capital REGEXP ? or Code2 REGEXP ?;");
+                    pst.setString(1, where);
+                    pst.setString(2, where);
+                    pst.setString(3, where);
+                    pst.setString(4, where);
+                    pst.setString(5, where);
+                    pst.setString(6, where);
+                    pst.setString(7, where);
+                    pst.setString(8, where);
+                    pst.setString(9, where);
+                    pst.setString(10, where);
+                    pst.setString(11, where);
+                    pst.setString(12, where);
+                    pst.setString(13, where);
+                    pst.setString(14, where);
+                    pst.setString(15, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
 
-            table_country.setItems(country);
-            code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
-            name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
-            cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
-            reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
-            surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
-            indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
-            pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
-            life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
-            GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
-            GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
-            local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
-            goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
-            head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
-            capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
-            code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
 
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
 
-        catch (SQLException ex) {
-            Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        if (opcion == 1) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Code like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Code REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
+
+        if (opcion == 2) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Name like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Name REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == 3) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Continent like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Continent REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == 4) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Region like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Region REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == 5) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where SurfaceArea like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where SurfaceArea REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == 6) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where IndepYear like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where IndepYear REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == 7) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Population like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Population REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == 8) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where LifeExpectancy like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where LifeExpectancy REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == 9) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where GNP like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where GNP REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == 10) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where GNPOld like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where GNPOld REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == 11) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where LocalName like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where LocalName REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == 12) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where GovernmentForm like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where GovernmentForm REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == 13) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where HeadOfState like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where HeadOfState REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == 14) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Capital like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Capital REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == 15) {
+            if (sql_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Code2 like ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (regexp_country_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            "select * from country where Code2 REGEXP ? ;");
+                    pst.setString(1, where);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            Country st = new Country();
+                            st.setCode(rs.getString("Code"));
+                            st.setName(rs.getString("Name"));
+                            st.setContinent(rs.getString("Continent"));
+                            st.setRegion(rs.getString("Region"));
+                            st.setSurface_area(rs.getString("SurfaceArea"));
+                            st.setIndep_year(rs.getString("IndepYear"));
+                            st.setPopulation(rs.getString("Population"));
+                            st.setLife_expectancy(rs.getString("LifeExpectancy"));
+                            st.setGnp(rs.getString("GNP"));
+                            st.setGnp_old(rs.getString("GNPOld"));
+                            st.setLocal_name(rs.getString("LocalName"));
+                            st.setGovernment_form(rs.getString("GovernmentForm"));
+                            st.setHead_state(rs.getString("HeadOfState"));
+                            st.setCapital(rs.getString("Capital"));
+                            st.setCode2(rs.getString("Code2"));
+                            country.add(st);
+                        }
+                    }
+
+                    table_country.setItems(country);
+                    code_country_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    name_country_col.setCellValueFactory(f -> f.getValue().nameProperty());
+                    cont_country_col.setCellValueFactory(f -> f.getValue().continentPropoerty());
+                    reg_country_col.setCellValueFactory(f -> f.getValue().regionProperty());
+                    surface_country_col.setCellValueFactory(f -> f.getValue().surface_areaProperty());
+                    indep_country_col.setCellValueFactory(f -> f.getValue().indep_yearProperty());
+                    pop_country_col.setCellValueFactory(f -> f.getValue().populationProperty());
+                    life_country_col.setCellValueFactory(f -> f.getValue().life_expectancyProperty());
+                    GNP_country_col.setCellValueFactory(f -> f.getValue().gnpProperty());
+                    GNPO_country_col.setCellValueFactory(f -> f.getValue().gnp_oldProperty());
+                    local_country_col.setCellValueFactory(f -> f.getValue().local_nameProperty());
+                    goverment_country_col.setCellValueFactory(f -> f.getValue().government_formProperty());
+                    head_country_col.setCellValueFactory(f -> f.getValue().head_stateProperty());
+                    capital_country_col.setCellValueFactory(f -> f.getValue().capitalProperty());
+                    code2_country_col.setCellValueFactory(f -> f.getValue().code2Property());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
     }
+
+    // -----------------------------------FIILTRO
+    // CITY-----------------------------------//
 
     @FXML
     void doFilter_City(ActionEvent event) {
+
+        int opcion = (combo_city.getSelectionModel().getSelectedIndex());
 
         String where;
         where = where_City.getText();
@@ -1014,43 +2992,424 @@ public class ManuPrincipalController implements Initializable {
         Connect();
         ObservableList<City> city = FXCollections.observableArrayList();
 
-        try {
-            pst = con.prepareStatement(
-                    // "select * from city where " + where + ";");
-                    "select * from city where ID like ? or Name like ? or District like ? or CountryCode like ? or Population like ?");
-            pst.setString(1, where);
-            pst.setString(2, where);
-            pst.setString(3, where);
-            pst.setString(4, where);
-            pst.setString(5, where);
+        if (opcion == (0)) {
+            if (sql_city_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            // "select * from city where " + where + ";");
+                            "select * from city where ID like ? or Name like ? or District like ? or CountryCode like ? or Population like ?");
+                    pst.setString(1, where);
+                    pst.setString(2, where);
+                    pst.setString(3, where);
+                    pst.setString(4, where);
+                    pst.setString(5, where);
 
-            ResultSet rs = pst.executeQuery();
-            {
-                while (rs.next()) {
-                    City st = new City();
-                    st.setId(rs.getString("ID"));
-                    st.setName(rs.getString("Name"));
-                    st.setDistrict(rs.getString("District"));
-                    st.setCountry_code(rs.getString("CountryCode"));
-                    st.setPopulation(rs.getString("Population"));
-                    city.add(st);
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            City st = new City();
+                            st.setId(rs.getString("ID"));
+                            st.setName(rs.getString("Name"));
+                            st.setDistrict(rs.getString("District"));
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setPopulation(rs.getString("Population"));
+                            city.add(st);
+                        }
+                    }
+
+                    table_city.setItems(city);
+                    id_col.setCellValueFactory(f -> f.getValue().idProperty());
+                    name_col.setCellValueFactory(f -> f.getValue().namProperty());
+                    district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+                    code_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (regexp_city_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            // "select * from city where " + where + ";");
+                            "select * from city where ID REGEXP ? or Name REGEXP ? or District REGEXP ? or CountryCode REGEXP ? or Population REGEXP ?");
+                    pst.setString(1, where);
+                    pst.setString(2, where);
+                    pst.setString(3, where);
+                    pst.setString(4, where);
+                    pst.setString(5, where);
+
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            City st = new City();
+                            st.setId(rs.getString("ID"));
+                            st.setName(rs.getString("Name"));
+                            st.setDistrict(rs.getString("District"));
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setPopulation(rs.getString("Population"));
+                            city.add(st);
+                        }
+                    }
+
+                    table_city.setItems(city);
+                    id_col.setCellValueFactory(f -> f.getValue().idProperty());
+                    name_col.setCellValueFactory(f -> f.getValue().namProperty());
+                    district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+                    code_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
-            table_city.setItems(city);
-            id_col.setCellValueFactory(f -> f.getValue().idProperty());
-            name_col.setCellValueFactory(f -> f.getValue().namProperty());
-            district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
-            code_col.setCellValueFactory(f -> f.getValue().codeProperty());
-            pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
-
         }
 
-        catch (SQLException ex) {
-            Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        if (opcion == 1) {
+            if (sql_city_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            // "select * from city where " + where + ";");
+                            "select * from city where ID like ?;");
+                    pst.setString(1, where);
+
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            City st = new City();
+                            st.setId(rs.getString("ID"));
+                            st.setName(rs.getString("Name"));
+                            st.setDistrict(rs.getString("District"));
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setPopulation(rs.getString("Population"));
+                            city.add(st);
+                        }
+                    }
+
+                    table_city.setItems(city);
+                    id_col.setCellValueFactory(f -> f.getValue().idProperty());
+                    name_col.setCellValueFactory(f -> f.getValue().namProperty());
+                    district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+                    code_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (regexp_city_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            // "select * from city where " + where + ";");
+                            "select * from city where ID REGEXP ? ;");
+                    pst.setString(1, where);
+
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            City st = new City();
+                            st.setId(rs.getString("ID"));
+                            st.setName(rs.getString("Name"));
+                            st.setDistrict(rs.getString("District"));
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setPopulation(rs.getString("Population"));
+                            city.add(st);
+                        }
+                    }
+
+                    table_city.setItems(city);
+                    id_col.setCellValueFactory(f -> f.getValue().idProperty());
+                    name_col.setCellValueFactory(f -> f.getValue().namProperty());
+                    district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+                    code_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == (2)) {
+            if (sql_city_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            // "select * from city where " + where + ";");
+                            "select * from city where Name like ? ;");
+                    pst.setString(1, where);
+
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            City st = new City();
+                            st.setId(rs.getString("ID"));
+                            st.setName(rs.getString("Name"));
+                            st.setDistrict(rs.getString("District"));
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setPopulation(rs.getString("Population"));
+                            city.add(st);
+                        }
+                    }
+
+                    table_city.setItems(city);
+                    id_col.setCellValueFactory(f -> f.getValue().idProperty());
+                    name_col.setCellValueFactory(f -> f.getValue().namProperty());
+                    district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+                    code_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (regexp_city_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            // "select * from city where " + where + ";");
+                            "select * from city where Name REGEXP ? ;");
+                    pst.setString(1, where);
+
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            City st = new City();
+                            st.setId(rs.getString("ID"));
+                            st.setName(rs.getString("Name"));
+                            st.setDistrict(rs.getString("District"));
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setPopulation(rs.getString("Population"));
+                            city.add(st);
+                        }
+                    }
+
+                    table_city.setItems(city);
+                    id_col.setCellValueFactory(f -> f.getValue().idProperty());
+                    name_col.setCellValueFactory(f -> f.getValue().namProperty());
+                    district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+                    code_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == (3)) {
+            if (sql_city_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            // "select * from city where " + where + ";");
+                            "select * from city where District like ? ;");
+                    pst.setString(1, where);
+
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            City st = new City();
+                            st.setId(rs.getString("ID"));
+                            st.setName(rs.getString("Name"));
+                            st.setDistrict(rs.getString("District"));
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setPopulation(rs.getString("Population"));
+                            city.add(st);
+                        }
+                    }
+
+                    table_city.setItems(city);
+                    id_col.setCellValueFactory(f -> f.getValue().idProperty());
+                    name_col.setCellValueFactory(f -> f.getValue().namProperty());
+                    district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+                    code_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (regexp_city_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            // "select * from city where " + where + ";");
+                            "select * from city where District REGEXP ? ;");
+                    pst.setString(1, where);
+
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            City st = new City();
+                            st.setId(rs.getString("ID"));
+                            st.setName(rs.getString("Name"));
+                            st.setDistrict(rs.getString("District"));
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setPopulation(rs.getString("Population"));
+                            city.add(st);
+                        }
+                    }
+
+                    table_city.setItems(city);
+                    id_col.setCellValueFactory(f -> f.getValue().idProperty());
+                    name_col.setCellValueFactory(f -> f.getValue().namProperty());
+                    district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+                    code_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == (4)) {
+            if (sql_city_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            // "select * from city where " + where + ";");
+                            "select * from city where CountryCode like ? ;");
+                    pst.setString(1, where);
+
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            City st = new City();
+                            st.setId(rs.getString("ID"));
+                            st.setName(rs.getString("Name"));
+                            st.setDistrict(rs.getString("District"));
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setPopulation(rs.getString("Population"));
+                            city.add(st);
+                        }
+                    }
+
+                    table_city.setItems(city);
+                    id_col.setCellValueFactory(f -> f.getValue().idProperty());
+                    name_col.setCellValueFactory(f -> f.getValue().namProperty());
+                    district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+                    code_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (regexp_city_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            // "select * from city where " + where + ";");
+                            "select * from city where CountryCode REGEXP ? ;");
+                    pst.setString(1, where);
+
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            City st = new City();
+                            st.setId(rs.getString("ID"));
+                            st.setName(rs.getString("Name"));
+                            st.setDistrict(rs.getString("District"));
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setPopulation(rs.getString("Population"));
+                            city.add(st);
+                        }
+                    }
+
+                    table_city.setItems(city);
+                    id_col.setCellValueFactory(f -> f.getValue().idProperty());
+                    name_col.setCellValueFactory(f -> f.getValue().namProperty());
+                    district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+                    code_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        if (opcion == (5)) {
+            if (sql_city_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            // "select * from city where " + where + ";");
+                            "select * from city where Population like ?");
+                    pst.setString(1, where);
+
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            City st = new City();
+                            st.setId(rs.getString("ID"));
+                            st.setName(rs.getString("Name"));
+                            st.setDistrict(rs.getString("District"));
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setPopulation(rs.getString("Population"));
+                            city.add(st);
+                        }
+                    }
+
+                    table_city.setItems(city);
+                    id_col.setCellValueFactory(f -> f.getValue().idProperty());
+                    name_col.setCellValueFactory(f -> f.getValue().namProperty());
+                    district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+                    code_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (regexp_city_button.isSelected()) {
+                try {
+                    pst = con.prepareStatement(
+                            // "select * from city where " + where + ";");
+                            "select * from city where Population REGEXP ?");
+                    pst.setString(1, where);
+
+                    ResultSet rs = pst.executeQuery();
+                    {
+                        while (rs.next()) {
+                            City st = new City();
+                            st.setId(rs.getString("ID"));
+                            st.setName(rs.getString("Name"));
+                            st.setDistrict(rs.getString("District"));
+                            st.setCountry_code(rs.getString("CountryCode"));
+                            st.setPopulation(rs.getString("Population"));
+                            city.add(st);
+                        }
+                    }
+
+                    table_city.setItems(city);
+                    id_col.setCellValueFactory(f -> f.getValue().idProperty());
+                    name_col.setCellValueFactory(f -> f.getValue().namProperty());
+                    district_col.setCellValueFactory(f -> f.getValue().dStringProperty());
+                    code_col.setCellValueFactory(f -> f.getValue().codeProperty());
+                    pop_col.setCellValueFactory(f -> f.getValue().pStringProperty());
+
+                }
+
+                catch (SQLException ex) {
+                    Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
 
+    // -----------------------------------RESETS-----------------------------------//
     @FXML
     void doReset_Country(ActionEvent event) {
         table_country();
@@ -1068,6 +3427,30 @@ public class ManuPrincipalController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        ToggleGroup tg = new ToggleGroup();
+        sql_CL_button.setToggleGroup(tg);
+        regexp_CL_button.setToggleGroup(tg);
+
+        ToggleGroup tgc = new ToggleGroup();
+        sql_city_button.setToggleGroup(tgc);
+        regexp_city_button.setToggleGroup(tgc);
+
+        ToggleGroup tga = new ToggleGroup();
+        sql_country_button.setToggleGroup(tga);
+        regexp_country_button.setToggleGroup(tga);
+
+        combo_CL.getItems().addAll("All", "CountryCode", "Language", "IsOfficial", "Percentage");
+        combo_CL.setValue("All");
+
+        combo_city.getItems().addAll("All", "ID", "Name", "District", "CountryCode", "Population");
+        combo_city.setValue("All");
+
+        combo_country.getItems().addAll("All", "Code", "Name", "Continent", "Region", "SurfaceArea", "IndepYear",
+                "Population",
+                "LifeExpectancy", "GNP", "GNPOld", "LocalName", "GovernmentForm", "HeadOfState", "Capital", "Code2");
+        combo_country.setValue("All");
+
         Connect();
         table_city();
         table_country();
