@@ -2869,6 +2869,7 @@ public class ManuPrincipalController implements Initializable {
                     Logger.getLogger(ManuPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+
         }
 
         if (opcion == 15) {
@@ -2975,7 +2976,6 @@ public class ManuPrincipalController implements Initializable {
                 }
             }
         }
-
     }
 
     // -----------------------------------FIILTRO
