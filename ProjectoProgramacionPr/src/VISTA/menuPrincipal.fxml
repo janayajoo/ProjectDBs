@@ -31,7 +31,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="gestionCountry" layoutX="-6.0" layoutY="30.0" prefHeight="431.0" prefWidth="1473.0" style="-fx-background-color: #eb984e;">
+      <Pane fx:id="gestionCountry" layoutX="-6.0" layoutY="30.0" prefHeight="431.0" prefWidth="1473.0" style="-fx-background-color: #eb984e;" visible="false">
          <children>
             <Pane layoutX="14.0" layoutY="69.0" prefHeight="354.0" prefWidth="626.0" style="-fx-border-color: #17202a;">
                <children>
@@ -203,7 +203,7 @@
                   <TextField fx:id="Perc_CL" layoutX="134.0" layoutY="311.0" prefHeight="32.0" prefWidth="352.0" />
                </children>
             </Pane>
-            <TableView fx:id="table_country_language" layoutX="521.0" layoutY="61.0" onMouseClicked="#CL_Click" prefHeight="362.0" prefWidth="929.0">
+            <TableView fx:id="table_country_language" layoutX="521.0" layoutY="61.0" prefHeight="362.0" prefWidth="929.0">
               <columns>
                 <TableColumn fx:id="country_code_col" prefWidth="129.0" text="CountryCode" />
                 <TableColumn fx:id="language_col" minWidth="0.0" prefWidth="291.0" text="Language" />
@@ -293,9 +293,9 @@
           <Menu fx:id="menuConsulta" mnemonicParsing="false" text="PROCESOS">
             <items>
                   <MenuItem fx:id="menuPrincipal" mnemonicParsing="false" onAction="#doMenu" text="Menu principal" />
-              <MenuItem fx:id="MoveCity" mnemonicParsing="false" onAction="#doCity" text="City CRUD" />
-                  <MenuItem fx:id="MoveCountry" mnemonicParsing="false" onAction="#doCountry" text="Country CRUD" />
-                  <MenuItem fx:id="MoveCL" mnemonicParsing="false" onAction="#doCL" text="Country Language CRUD" />
+              <MenuItem fx:id="MoveCity" mnemonicParsing="false" onAction="#doCity" text="City" />
+                  <MenuItem fx:id="MoveCountry" mnemonicParsing="false" onAction="#doCountry" text="Country" />
+                  <MenuItem fx:id="MoveCL" mnemonicParsing="false" onAction="#doCL" text="Country Language" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="SALIDA">

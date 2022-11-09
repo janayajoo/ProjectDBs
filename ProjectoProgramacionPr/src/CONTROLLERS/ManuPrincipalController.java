@@ -871,19 +871,6 @@ public class ManuPrincipalController implements Initializable {
         }
     }
 
-    @FXML
-    void CL_Click(MouseEvent event) {
-        myIndex = table_country_language.getSelectionModel().getSelectedIndex();
-
-        id_s = (String.valueOf(table_country_language.getItems().get(myIndex).getCountry_code()));
-
-        code_CLnew = CountryCode_CL.getText();
-        language_CLnew = Language_CL.getText();
-        official_CLnew = Official_CL.getText();
-        perc_CLnew = Perc_CL.getText();
-        System.out.println(code_CLnew);
-    }
-
     // -----------------------------------UPDATECL-----------------------------------//
 
     @FXML
