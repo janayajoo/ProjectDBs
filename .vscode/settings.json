@@ -8,6 +8,14 @@
         "c:\\Java\\javafx-sdk-19\\lib\\javafx.media.jar",
         "c:\\Java\\javafx-sdk-19\\lib\\javafx.swing.jar",
         "c:\\Java\\javafx-sdk-19\\lib\\javafx.web.jar",
-        "c:\\Java\\javafx-sdk-19\\lib\\javafx-swt.jar"
+        "c:\\Java\\javafx-sdk-19\\lib\\javafx-swt.jar",
+        "/Users/jorgeanaya/Downloads/javafx-sdk-19/lib/javafx-swt.jar",
+        "/Users/jorgeanaya/Downloads/javafx-sdk-19/lib/javafx.base.jar",
+        "/Users/jorgeanaya/Downloads/javafx-sdk-19/lib/javafx.controls.jar",
+        "/Users/jorgeanaya/Downloads/javafx-sdk-19/lib/javafx.fxml.jar",
+        "/Users/jorgeanaya/Downloads/javafx-sdk-19/lib/javafx.graphics.jar",
+        "/Users/jorgeanaya/Downloads/javafx-sdk-19/lib/javafx.media.jar",
+        "/Users/jorgeanaya/Downloads/javafx-sdk-19/lib/javafx.swing.jar",
+        "/Users/jorgeanaya/Downloads/javafx-sdk-19/lib/javafx.web.jar"
     ]
 }

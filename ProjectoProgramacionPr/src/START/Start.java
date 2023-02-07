@@ -32,7 +32,7 @@ public class Start extends Application {
         Ventana.setTitle("PROYECTO DB");
 
         // Ventana.SetOnCloserequest(event -> )
-        Ventana.setResizable(false);
+        Ventana.setResizable(true);
 
         Ventana.show();
 

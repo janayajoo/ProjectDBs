@@ -494,9 +494,9 @@ public class ManuPrincipalController implements Initializable {
             pst.executeUpdate();
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("City Registation");
+            alert.setTitle("Country Registation");
 
-            alert.setHeaderText("City Registation");
+            alert.setHeaderText("Country Registation");
             alert.setContentText("Record Added!");
 
             alert.showAndWait();
